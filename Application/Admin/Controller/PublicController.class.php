@@ -1,0 +1,329 @@
+<?php
+namespace Admin\Controller;
+use Think\Controller;
+class PublicController extends Controller
+{
+
+    public function _initialize()
+    {
+        $this -> assign('UserName',session(C('USERNAME')));
+    }
+
+    /**
+     * success 执行成功返回json格式
+     * @param $message 提示字符串
+     * @param $url 跳转地址
+     * @author 刘中胜(996674366@qq.com)
+     * @time 2015-15-05
+     **/
+    protected function success($message, $url = '')
+    {
+        $array = array(
+            'statusCode' => 200,
+            'message'    => $message,
+            'url'        => $url
+        );
+        die(json_encode($array));
+    }
+
+    /**
+     * error 执行成功返回json格式
+     * @param string $message 提示字符串
+     * @param string $url 跳转地址
+     * @author 刘中胜
+     * @time 2015-15-05
+     **/
+    protected function error($message='')
+    {
+        $array = array(
+            'statusCode' => 300,
+            'message'    => $message,
+        );
+        die(json_encode($array));
+    }
+
+
+
+    /**
+     * login 登录页面
+     * @author 刘中胜
+     * @time 2015-04-29
+     **/
+    public function login()
+    {
+        if(session(C('UID'))){
+            $this->redirect('Index/index');
+        }else{
+            $this->display();
+        }
+    }
+
+    /**
+     * islogin 检测登录
+     * @author 刘中胜
+     * @time 2015-04-29
+     **/
+    public function islogin()
+    {
+        $model = D('Admin');
+        $data = $model->login();
+        if($data){
+            $str = self::_rules();
+            $where = array(
+                'id' => array('in',$str),
+                'level' => 0,
+                'status' => 1
+            );
+            $url = M('auth_cate')->where($where)->getField('module');
+            $this->success('登录成功', U($url.'/Index/index'));
+        }else{
+            $this->error($model->getError());
+        }
+    }
+
+    /**
+     * code 检测验证码
+     * @author 刘中胜
+     * @time 2015-3-23
+     **/
+    public function code()
+    {
+        code();
+    }
+
+    /**
+     * logout 退出登录
+     * @author 刘中胜
+     * @time 2015-06-05
+     **/
+    public function logout()
+    {
+        session(C('uid'), null);
+        $this->redirect(C('DEFAULTS_MODULE').'/Public/login');
+    }
+
+    /**
+     * resetpwd 重置密码
+     * @author 刘中胜
+     * @time 2015-06-05
+     **/
+    public function resetpwd()
+    {
+        $where = array(
+            'id'     => session(C('UID')),
+            'status' => 1
+        );
+        $uid = M('admin')->where($where)->getField('id');
+        $this->assign('uid', $uid);
+        $this->display();
+    }
+
+    /**
+     * updatepwd 修改密码操作
+     * @author 刘中胜
+     * @time 2015-06-05
+     **/
+    public function updatepwd()
+    {
+        $model = M();
+        $model->startTrans();
+        $char = randNum();
+        $id = I('post.id',0,'intval');
+        if(empty($id)){
+             $this->error('参数错误');
+        }
+        $password = trim(I('post.password'));
+        if($password == ''){
+             $this->error('原始密码不能为空');
+        }
+        $new_pwd = trim(I('post.new_pwd'));
+        if($new_pwd == ''){
+            $this->error('新密码不能为空');
+        }
+        $rep_new_pwd = trim(I('post.rep_new_pwd'));
+        if($rep_new_pwd == ''){
+            $this->error('确认密码不能为空');
+        }
+        if($new_pwd != $rep_new_pwd){
+            $this->error('两次密码不一致');
+        }
+
+        $where = array(
+            'id' => $id,
+        );
+        $chars = M('char')->where($where)->getField('chars');
+        $where = array(
+            'password' => md5Encrypt($password, $chars),
+            'status'   => 1
+        );
+        $user = M('admin')->where($where)->getField('id');
+        if(!$user){
+            $this->error('原始密码错误');
+        }
+        $pwd = md5Encrypt($new_pwd, $char);
+        $data = array(
+            'up_time'  => time(),
+            'up_ip'    => get_client_ip(),
+            'password' => $pwd,
+        );
+        $res = M('admin')->where($where)->save($data);
+        if($res){
+            $data = array(
+                'chars' => $char,
+                'id'    => $id
+            );
+            $res = M('char')->save($data);
+            if($res === false){
+                $model->rollback();
+                $this->error('修改失败');
+            }else{
+                $model->commit();
+                session(C('UID'), NULL);
+                $this->success('修改成功', U('Public/login'));
+            }
+        }else{
+            $model->rollback();
+            $this->error('修改失败');
+        }
+    }
+    /**
+     * 分组权限查询
+     * @author 刘中胜
+     * @return array $str 返回查询到的权限
+     **/
+    protected function _rules()
+    {
+        $uid = session(C('UID'));
+        if(empty($uid)){
+            $this->redirect(C('DEFAULTS_MODULE').'/Public/login');
+        }
+        $str = S('group_rules'.UID);
+        if($str == false){
+            $where = array(
+                'uid' => $uid
+            );
+            $group = M('group_access')->where($where)->getField('group_id', true);
+            $where = array(
+              'id'     => array('in', $group),
+              'status' => 1
+            );
+            $list = M('group')->where($where)->getField('rules', true);
+            $str = implode(',', $list);
+            $strArr = explode(',', $str);
+            $str = array_unique($strArr);
+            S('group_rules'.UID,$str);
+        }
+        return $str;
+
+    }
+    /**
+     * flashupload 上传方法
+     * @author 刘中胜
+     * @time 2015-3-17
+     **/
+    public function flashupload(){
+        $upload           = new \Think\Upload();
+        $upload->maxSize  = 31457280000;
+        $upload->exts     = array('jpg', 'gif', 'png', 'jpeg');
+        $rootPath         = $upload->rootPath = './Upload/';
+        $upload->autoSub  = false;
+        $upload->savePath = date('Y/md/');
+        $info             = $upload->upload();
+        if(!$info){
+            header("HTTP/1.1 500 Internal Server Error");
+            echo $upload->getError();
+            exit(0);
+        }
+        $imgSrc    = $rootPath.$info['Filedata']['savepath'].$info['Filedata']['savename'];
+        $widthArr  = explode(',', I('get.width', '','trim'));
+        $heightArr = explode(',', I('get.height', '','trim'));
+        $resArr    = array();
+
+        if(!empty($widthArr)){
+            $image = new \Think\Image();
+            foreach($widthArr as $key=>$w){
+                $w = trim($w);
+                $h = trim($heightArr[$key]);
+                $image->open($imgSrc);
+                $thumbName =  $rootPath.$info['Filedata']['savepath']."thumb/{$w}x{$h}/".$info['Filedata']['savename'];
+                if(!is_dir(dirname($thumbName))){
+                    mkdir(dirname($thumbName), 0755, true);
+                }
+                $image -> thumb($w, $h, 3)
+                    -> save($thumbName,$info['ext'],100);
+                    $watermark = I('get.watermark',0,'intval');
+                    if($watermark == 1){
+                        $waterMarkImg = C('WATER_MARK_IMG');
+                        $warerMarkPos = C('WATER_MARK_POS');
+                        if(!is_array($warerMarkPos)){
+                            $warerMarkPos = array(9);
+                        }
+                        foreach ($warerMarkPos as $value) {
+                            $image->open($thumbName)->water($waterMarkImg, $value)->save($thumbName);
+                        }
+                    }
+                if(!isset($resArr['thumb'])){
+                    $resArr['thumb'] = ltrim($thumbName, '.');
+                }
+            }
+        }
+
+        if(!isset($resArr['thumb'])){
+            $resArr = ltrim($imgSrc, '.');
+        }
+
+        $resArr['img'] = ltrim($imgSrc, '.');
+        die(json_encode($resArr));
+    }
+
+    /**
+     * editUpload 编辑器上传图片
+     * @author 刘中胜
+     * @time 2015-04-29
+     **/
+    public function editUpload(){
+        $upload = new \Think\Upload();// 实例化上传类
+        $upload->maxSize   =     3145728 ;// 设置附件上传大小
+        $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+        $rootPath = $upload->rootPath  =     './Upload/'; // 设置附件上传根目录
+        $upload->savePath  =     ''; // 设置附件上传（子）目录
+        $upload->autoSub  = true;
+        $upload->subName  = array('date','Y/m/d');
+        // 上传文件
+        $info   =   $upload->upload();
+        $arr = array();
+        if(!$info){
+
+            $arr['state']           = 'ERROR';
+        }else{
+            $infos = $info['upfile'];
+            $savePath = ltrim($infos['savepath'],'.');
+            $filePathName = '/Upload/'.$savePath.$infos['savename'];
+            $arr['originalName']    = $infos['name'];
+            $arr['name']            = $infos['savename'];
+            $arr['url']             = $filePathName;
+            $arr['size']            = $infos['size'];
+            $arr['type']            = $infos['ext'];
+            $arr['state']           = 'SUCCESS';
+        }
+        die(json_encode($arr));
+    }
+
+    /**
+     * 调试工具
+     * @author 刘中胜
+     * @time 2016-01-24
+     **/
+    public function log($value){
+        \ChromePhp::log($value);
+    }
+
+    /**
+     * 调试工具
+     * @author 刘中胜
+     * @time 2016-01-24
+     **/
+    public function tablelog($value){
+        \ChromePhp::table($value);
+    }
+}
