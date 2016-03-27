@@ -6,9 +6,7 @@ class PublicController extends Controller
 
     public function _initialize()
     {
-        if(session(C('USERNAME'))){
-            $this -> assign('UserName',session(C('USERNAME')));
-        }
+        
     }
 
     /**
