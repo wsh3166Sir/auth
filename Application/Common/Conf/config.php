@@ -44,7 +44,7 @@ return array(
     'USERNAME'              => 'username',
     'APP_SUB_DOMAIN_DEPLOY' => 1, // 开启子域名配置
     'DEFAULTS_MODULE'       => 'Admin',
-    'DEFAULT_MODULE'        => 'Home',
+    'DEFAULT_MODULE'        => 'Admin',
 
     //邮件配置
     'MAIL_HOST' =>'smtp.163.com',//smtp服务器的名称
