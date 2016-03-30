@@ -15,7 +15,7 @@ class PrivateController extends PublicController
         }
         defined("UID") or define("UID", $uid);
         $UserName = session(C('USERNAME'));
-        if(empty($UserName)){
+        if(!empty($UserName)){
             $this -> assign('UserName',session(C('USERNAME')));
         }
         $this->_left_menu();
