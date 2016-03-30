@@ -13,7 +13,8 @@ class PrivateController extends PublicController
         if($uid == null){
             $this->redirect(C('DEFAULTS_MODULE').'/Public/login');
         }
-        if(!empty(session(C('USERNAME')))){
+		$userName = session(C('USERNAME'));
+        if(!empty($userName)){
             $this -> assign('UserName',session(C('USERNAME')));
         }
         defined("UID") or define("UID", $uid);
