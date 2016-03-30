@@ -4,7 +4,9 @@ class IndexController extends PrivateController {
     public function index(){
         $module = MODULE_NAME;
         $modules = I('get.module','');
-        delTemp();
+        if(!empty($module)){
+            delTemp();
+        }
         $this -> redirect(MODULE_NAME.'/'.CONTROLLER_NAME.'/info');
 
         // dump($createTime = M()->query("show columns from {$v}"));
