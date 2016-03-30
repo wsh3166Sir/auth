@@ -46,7 +46,6 @@ class AdminModel extends \Common\Model\PublicModel
             $where = array(
                 'username' => trim($data['username']),
                 'status'   => 1,
-                'type'     => 0
             );
             if($this->where($where)->getField('id')){
                 $this->error = '该用户已经存在';
@@ -144,7 +143,8 @@ class AdminModel extends \Common\Model\PublicModel
         }
         $userWhere = array(
             'a.username' => trim($data['username']),
-            'a.status'   => 1
+            'a.status'   => 1,
+            'c.type'     => 0
         );
         $chars = M()
             ->table('__ADMIN__ a')

@@ -1,25 +1,5 @@
 <?php
-/**
- * randNum 生成随机数
- * @author 刘中胜
- * @time 2015-08-14
- **/
-function randNum(){
-    return mt_rand(10000,99999999999);
-}
 
-/**
- * md5Encrypt 加密函数
- * @param string $str 要加密的字符串
- * @return string $chars 加密后的字符串
- * @author 刘中胜
- * @time 2015-04-13
- **/
-function md5Encrypt($str='',$rand=''){
-    $hash = $str.$rand;
-    $chars =  MD5(hash('sha256', $hash));
-    return $chars;
-}
 
 /**
  * code 验证码函数
