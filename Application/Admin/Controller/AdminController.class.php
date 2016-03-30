@@ -21,6 +21,7 @@ class AdminController extends PrivateController
         self::isBut($but);
         $where = array(
             'status' => 1,
+            'type'   => 0
         );
         $list = self::_modelCount($where);
         $dataArr = self::_modelSelect($where, 'sort DESC', "id,username,phone,last_time,email,addtime", $list['limit']);

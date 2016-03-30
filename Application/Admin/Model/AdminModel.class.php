@@ -45,7 +45,8 @@ class AdminModel extends \Common\Model\PublicModel
 
             $where = array(
                 'username' => trim($data['username']),
-                'status'   => 1
+                'status'   => 1,
+                'type'     => 0
             );
             if($this->where($where)->getField('id')){
                 $this->error = '该用户已经存在';
@@ -63,10 +64,10 @@ class AdminModel extends \Common\Model\PublicModel
                 M('group_access')->addAll($groupArr);
                 $charData = array(
                     'chars' => $char,
-                    'id'    => $id
+                    'id'    => $id,
+                    'type'  => 0
                 );
-
-                $chars = M('char')->add(array('chars'=>$char,'id'=>$id));
+                $chars = M('char')->add($charData);
                 if(!$chars){
                     $this->rollback();
                     $this->error = '添加失败';

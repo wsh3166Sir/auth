@@ -1,5 +1,25 @@
 <?php
+/**
+ * randNum 生成随机数
+ * @author 刘中胜
+ * @time 2015-08-14
+ **/
+function randNum(){
+    return mt_rand(1000,99999999);
+}
 
+/**
+ * md5Encrypt 加密函数
+ * @param string $str 要加密的字符串
+ * @return string $chars 加密后的字符串
+ * @author 刘中胜
+ * @time 2015-04-13
+ **/
+function md5Encrypt($str='',$rand=''){
+    $hash = $str.$rand;
+    $chars =  MD5(hash('sha256', $hash));
+    return $chars;
+}
 /**
  * 删除缓存文件
  * @param string $dir 默认temp目录
@@ -164,4 +184,15 @@ function sendMail($to, $title, $content) {
     $mail->Body = $content; //邮件内容
     $mail->AltBody = "这是一个纯文本的身体在非营利的HTML电子邮件客户端"; //邮件正文不支持HTML的备用显示
     return($mail->Send());
+}
+
+/**
+ * @param $str 要加密的字符串
+ * @return string 加密后的字符串
+ */
+function homeUserPwd($str)
+{
+    $hash = Md5($str);
+    $str = MD5(hash('sha256', $hash));
+    return $str;
 }

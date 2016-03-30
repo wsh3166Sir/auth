@@ -6,6 +6,7 @@ return array(
     ),
     'TMPL_PARSE_STRING'     => array(
         '__ADMINSTYLE__' => __ROOT__ . '/Public/Admin',
+        '__HOMESTYLE__' => __ROOT__ . '/Public/Home',
     ),
     'URL_MODEL'             => 2,
     /* 数据库设置 */
@@ -17,8 +18,8 @@ return array(
     'DB_PORT'               => '3306',        // 端口
     'DB_PREFIX'             => 'a_',    // 数据库表前缀
     'DB_PARAMS'             => array(), // 数据库连接参数
-    'DB_DEBUG'              => TRUE, // 数据库调试模式 开启后可以记录SQL日志
-    'DB_FIELDS_CACHE'       => true,        // 启用字段缓存
+    'DB_DEBUG'              => true, // 数据库调试模式 开启后可以记录SQL日志
+    'DB_FIELDS_CACHE'       => false,        // 启用字段缓存
     'DB_CHARSET'            => 'utf8',      // 数据库编码默认采用utf8
     'DB_DEPLOY_TYPE'        => 0, // 数据库部署方式:0 集中式(单一服务器),1 分布式(主从服务器)
     'DB_RW_SEPARATE'        => false,       // 数据库读写是否分离 主从式有效
@@ -43,7 +44,7 @@ return array(
     'USERNAME'              => 'username',
     'APP_SUB_DOMAIN_DEPLOY' => 1, // 开启子域名配置
     'DEFAULTS_MODULE'       => 'Admin',
-    'DEFAULT_MODULE'        => 'Admin',
+    'DEFAULT_MODULE'        => 'Home',
 
     //邮件配置
     'MAIL_HOST' =>'smtp.163.com',//smtp服务器的名称
