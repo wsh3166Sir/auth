@@ -16,3 +16,4 @@
 <p>2016-03-27 修复某些情况下出现的验证码验证无法通过等现象</p>
 <p>2016-03-30 修复empty 检测时发生的错误</p>
 <p style="padding-left:89px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修复删除缓存文件时发生的错误</p>
+<p>2016-05-09 修复js操作框不隐藏的问题</p>

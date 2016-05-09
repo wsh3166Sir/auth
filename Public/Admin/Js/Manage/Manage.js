@@ -2,7 +2,12 @@ var Manage = {
     uiInit: function(box){
         var $p = $(box || document);
         Juuz.uiInit($p);
-
+        $(document).click(function(e){
+            var target = $(e.target);
+            if(target.closest('.js_list_tools').length == 0){
+                $('.list_tools_menu').hide();
+            }
+        });
         $('input,textarea', $p).focusClass().addRequireClass();
         $('input[readonly=readonly],textarea[readonly=readonly]', $p).addClass('readonly');
         $('input[disabled=disabled],textarea[disabled=disabled]', $p).addClass('disabled');
