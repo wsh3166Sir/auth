@@ -393,21 +393,23 @@ class PrivateController extends PublicController
                     $module[] = $value['id'];
                 }
             }
-            $where = array(
-                'id'     => array('in', $module),
-                'status' => 1
-            );
-            $url = M('auth_cate')->where($where)->field('id,title,module')->order('sort DESC')->select();
-            foreach ($url as $key => &$value) {
+            if(!empty($module)){
                 $where = array(
-                    'pid'    => $value['id'],
+                    'id'     => array('in', $module),
                     'status' => 1
                 );
-                $str = M('auth_cate')->where($where)->getField('module');
-                $value['url'] = U($str . '/Index/index',array('module'=>MODULE_NAME));
+                $url = M('auth_cate')->where($where)->field('id,title,module')->order('sort DESC')->select();
+                foreach ($url as $key => &$value) {
+                    $where = array(
+                        'pid'    => $value['id'],
+                        'status' => 1
+                    );
+                    $str = M('auth_cate')->where($where)->getField('module');
+                    $value['url'] = U($str . '/Index/index',array('module'=>MODULE_NAME));
+                }
+                unset($value);
+                S('web_top_menu'.UID,$url);
             }
-            unset($value);
-            S('web_top_menu'.UID,$url);
         }
         if(count($url) > 1){
             $this->assign('web_top_menu_url', $url);
