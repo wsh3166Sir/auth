@@ -314,22 +314,4 @@ class PublicController extends Controller
         die(json_encode($arr));
     }
 
-    /**
-     * 调试工具
-     * @author 刘中胜
-     * @time 2016-01-24
-     **/
-    public function log($value){
-        \ChromePhp::log($value);
-    }
-
-    /**
-     * 调试工具
-     * @author 刘中胜
-     * @time 2016-01-24
-     **/
-    public function tablelog($value){
-        \ChromePhp::table($value);
-    }
-
 }
