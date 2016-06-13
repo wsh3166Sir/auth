@@ -18,4 +18,4 @@
 <p style="padding-left:89px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修复删除缓存文件时发生的错误</p>
 <p>2016-05-09 修复js操作框不隐藏的问题</p>
 <p>2016-05-11 新增api接口模块</p>
-<p>2016-06-14 删除无用文件,完善代码注释，修复文件上传错误bug</p>
+<p>2016-06-14 删除无用文件,完善代码注释，修复文件上传错误bug,优化部分代码</p>

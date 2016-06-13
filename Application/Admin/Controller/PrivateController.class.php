@@ -36,6 +36,10 @@ class PrivateController extends PublicController
         if(!empty($UserName)){
             $this -> assign('UserName',session(C('USERNAME')));
         }
+		//检测是否为超级管理员
+        if(UID == C('ADMINISTRATOR')){
+            return true;
+        }
 		//分配左边菜单
         $this->_left_menu();
 		//分配列表上方菜单
@@ -57,31 +61,25 @@ class PrivateController extends PublicController
 			//将结果写入缓存
             S('check_iskey'.UID,$iskey);
         }
-		//检测是否为超级管理员
-        if(UID == C('ADMINISTRATOR')){
-            return true;
-        }
-		//如果缓存不为空那么检测该规则id是否存在于分组拥有的权限里
-        if($iskey != null){
-            if(!in_array($iskey,$groupids)){
-                $this->auth = new Auth();
-                if(!$this->auth->check($key, UID)){
-					$url = C('DEFAULTS_MODULE').'/Public/login';
-					//如果为ajax请求，则返回301，并且跳转到指定页面
-                    if(IS_AJAX){
-                        session('[destroy]');
-                        $data = array(
-                            'statusCode' => 301,
-                            'url'        => $url
-                        );
-                        die(json_encode($data));
-                    }else{
-                        session('[destroy]');
-                        $this->redirect($url);
-                    }
-                }
-            }
-        }
+		//检测该规则id是否存在于分组拥有的权限里
+		if(!in_array($iskey,$groupids)){
+			$this->auth = new Auth();
+			if(!$this->auth->check($key, UID)){
+				$url = C('DEFAULTS_MODULE').'/Public/login';
+				//如果为ajax请求，则返回301，并且跳转到指定页面
+				if(IS_AJAX){
+					session('[destroy]');
+					$data = array(
+						'statusCode' => 301,
+						'url'        => $url
+					);
+					die(json_encode($data));
+				}else{
+					session('[destroy]');
+					$this->redirect($url);
+				}
+			}
+		}
     }
 
     /**
