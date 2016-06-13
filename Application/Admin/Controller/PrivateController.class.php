@@ -1,56 +1,83 @@
 <?php
+// +----------------------------------------------------------------------
+// | 基于Thinkphp3.2.3开发的一款权限管理系统
+// +----------------------------------------------------------------------
+// | Copyright (c) www.php63.cc All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: 普罗米修斯 <996674366@qq.com>
+// +----------------------------------------------------------------------
 namespace Admin\Controller;
 use Think\Auth;
 class PrivateController extends PublicController
 {
     public $model = null;
     private $auth = null;
-
+	
+	/**
+	 * 初始化方法
+	 * @auth 普罗米修斯 www.php63.cc
+	 **/
     public function _initialize()
     {
+		//继承上级初始化方法
         parent::_initialize();
+		//获取uid， 注：为了方便后期统一修改，在配置文件里新增一项 'UID' => 'uid'
         $uid = session(C('UID'));
+		//检测session是否存在如果不存在跳转到默认模块
         if($uid == null){
             $this->redirect(C('DEFAULTS_MODULE').'/Public/login');
         }
+		//将uid定义为常量方便后期统一使用
         defined("UID") or define("UID", $uid);
         $UserName = session(C('USERNAME'));
+		//检测后台管理员昵称是否存在，如果不等于空或者0则获取配置文件里定义的name名字并分配给首页
         if(!empty($UserName)){
             $this -> assign('UserName',session(C('USERNAME')));
         }
+		//分配左边菜单
         $this->_left_menu();
+		//分配列表上方菜单
         $this->_top_menu();
+		//分配网站顶部菜单
         $this->_web_top_menu();
+		//获取到当前用户所属所有分组拥有的权限id
         $groupids = self::_rules();
+		//读取缓存名为check_iskey+uid的缓存
         $iskey = S('check_iskey'.UID);
         $key = MODULE_NAME . '/' . CONTROLLER_NAME . '/' . ACTION_NAME;
+		//如果缓存等于false查询当前路径的规则id
         if($iskey == false){
             $where = array(
                 'name' => $key,
                 'status' => 1
             );
             $iskey = M('auth_cate')->where($where)->getField('id');
+			//将结果写入缓存
             S('check_iskey'.UID,$iskey);
-
         }
+		//检测是否为超级管理员
         if(UID == C('ADMINISTRATOR')){
             return true;
         }
+		//如果缓存不为空那么检测该规则id是否存在于分组拥有的权限里
         if($iskey != null){
-
             if(!in_array($iskey,$groupids)){
                 $this->auth = new Auth();
                 if(!$this->auth->check($key, UID)){
+					$url = C('DEFAULTS_MODULE').'/Public/login';
+					//如果为ajax请求，则返回301，并且跳转到指定页面
                     if(IS_AJAX){
                         session('[destroy]');
                         $data = array(
                             'statusCode' => 301,
-                            'url'        => 'Admin/Public/login'
+                            'url'        => $url
                         );
                         die(json_encode($data));
                     }else{
                         session('[destroy]');
-                        $this->redirect('Admin/Public/login');
+                        $this->redirect($url);
                     }
                 }
             }
@@ -253,7 +280,6 @@ class PrivateController extends PublicController
             }else{
                 $url = U($url);
             }
-
             if($type == 1){
                 $butArr = array(
                     'data-opt' => "{title:'" . "$title',url:'" . "$url'" . '}',

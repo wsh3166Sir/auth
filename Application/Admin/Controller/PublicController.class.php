@@ -234,44 +234,49 @@ class PublicController extends Controller
             echo $upload->getError();
             exit(0);
         }
-        $imgSrc    = $rootPath.$info['Filedata']['savepath'].$info['Filedata']['savename'];
-        $widthArr  = explode(',', I('get.width', '','trim'));
-        $heightArr = explode(',', I('get.height', '','trim'));
-        $resArr    = array();
+		//接受上传类型
+		$upload_type = I('get.type');
+		//如果上传类型不是文件则执行如下代码
+		if($upload_type != 'file'){
+			$imgSrc    = $rootPath.$info['Filedata']['savepath'].$info['Filedata']['savename'];
+			$widthArr  = explode(',', I('get.width', '','trim'));
+			$heightArr = explode(',', I('get.height', '','trim'));
+			$resArr    = array();
 
-        if(!empty($widthArr)){
-            $image = new \Think\Image();
-            foreach($widthArr as $key=>$w){
-                $w = trim($w);
-                $h = trim($heightArr[$key]);
-                $image->open($imgSrc);
-                $thumbName =  $rootPath.$info['Filedata']['savepath']."thumb/{$w}x{$h}/".$info['Filedata']['savename'];
-                if(!is_dir(dirname($thumbName))){
-                    mkdir(dirname($thumbName), 0755, true);
-                }
-                $image -> thumb($w, $h, 3)
-                    -> save($thumbName,$info['ext'],100);
-                    $watermark = I('get.watermark',0,'intval');
-                    if($watermark == 1){
-                        $waterMarkImg = C('WATER_MARK_IMG');
-                        $warerMarkPos = C('WATER_MARK_POS');
-                        if(!is_array($warerMarkPos)){
-                            $warerMarkPos = array(9);
-                        }
-                        foreach ($warerMarkPos as $value) {
-                            $image->open($thumbName)->water($waterMarkImg, $value)->save($thumbName);
-                        }
-                    }
-                if(!isset($resArr['thumb'])){
-                    $resArr['thumb'] = ltrim($thumbName, '.');
-                }
-            }
-        }
-
-        if(!isset($resArr['thumb'])){
-            $resArr = ltrim($imgSrc, '.');
-        }
-
+			if(!empty($widthArr)){
+				$image = new \Think\Image();
+				//图片裁剪
+				foreach($widthArr as $key=>$w){
+					$w = trim($w);
+					$h = trim($heightArr[$key]);
+					$image->open($imgSrc);
+					$thumbName =  $rootPath.$info['Filedata']['savepath']."thumb/{$w}x{$h}/".$info['Filedata']['savename'];
+					if(!is_dir(dirname($thumbName))){
+						mkdir(dirname($thumbName), 0755, true);
+					}
+					$image -> thumb($w, $h, 3)
+						-> save($thumbName,$info['ext'],100);
+						$watermark = I('get.watermark',0,'intval');
+						//检测是否打水印如果等于1则代表需要打水印，
+						if($watermark == 1){
+							$waterMarkImg = C('WATER_MARK_IMG');
+							$warerMarkPos = C('WATER_MARK_POS');
+							if(!is_array($warerMarkPos)){
+								$warerMarkPos = array(9);
+							}
+							foreach ($warerMarkPos as $value) {
+								$image->open($thumbName)->water($waterMarkImg, $value)->save($thumbName);
+							}
+						}
+					if(!isset($resArr['thumb'])){
+						$resArr['thumb'] = ltrim($thumbName, '.');
+					}
+				}
+			}
+			if(!isset($resArr['thumb'])){
+				$resArr = ltrim($imgSrc, '.');
+			}
+		}
         $resArr['img'] = ltrim($imgSrc, '.');
         die(json_encode($resArr));
     }
