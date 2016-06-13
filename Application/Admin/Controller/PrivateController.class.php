@@ -36,10 +36,6 @@ class PrivateController extends PublicController
         if(!empty($UserName)){
             $this -> assign('UserName',session(C('USERNAME')));
         }
-		//检测是否为超级管理员
-        if(UID == C('ADMINISTRATOR')){
-            return true;
-        }
 		//分配左边菜单
         $this->_left_menu();
 		//分配列表上方菜单
@@ -48,6 +44,10 @@ class PrivateController extends PublicController
         $this->_web_top_menu();
 		//获取到当前用户所属所有分组拥有的权限id
         $groupids = self::_rules();
+		//检测是否为超级管理员
+        if(UID == C('ADMINISTRATOR')){
+            return true;
+        }
 		//读取缓存名为check_iskey+uid的缓存
         $iskey = S('check_iskey'.UID);
         $key = MODULE_NAME . '/' . CONTROLLER_NAME . '/' . ACTION_NAME;
@@ -81,7 +81,6 @@ class PrivateController extends PublicController
 			}
 		}
     }
-
     /**
      * 添加编辑操作
      * @param string $model 要操作的表
