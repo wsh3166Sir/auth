@@ -3,12 +3,6 @@ namespace Admin\Controller;
 use Think\Controller;
 class PublicController extends Controller
 {
-
-    public function _initialize()
-    {
-       
-    }
-
     /**
      * success 执行成功返回json格式
      * @param $message 提示字符串

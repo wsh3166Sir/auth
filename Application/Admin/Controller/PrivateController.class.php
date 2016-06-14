@@ -21,8 +21,6 @@ class PrivateController extends PublicController
 	 **/
     public function _initialize()
     {
-		//继承上级初始化方法
-        parent::_initialize();
 		//获取uid， 注：为了方便后期统一修改，在配置文件里新增一项 'UID' => 'uid'
         $uid = session(C('UID'));
 		//检测session是否存在如果不存在跳转到默认模块
