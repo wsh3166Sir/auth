@@ -55,7 +55,7 @@ class PublicController extends Controller
     public function login()
     {
         if(session(C('UID'))){
-            $this->redirect('Index/index');
+            $this->redirect(C('DEFAULTS_MODULE').'Index/index');
         }else{
             $this->display();
         }
