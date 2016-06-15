@@ -187,14 +187,10 @@ class PublicController extends Controller
      **/
     protected function _rules()
     {
-        $uid = session(C('UID'));
-        if(empty($uid)){
-            $this->redirect(C('DEFAULTS_MODULE').'/Public/login');
-        }
         $str = S('group_rules'.UID);
         if($str == false){
             $where = array(
-                'uid' => $uid
+                'uid' => UID
             );
             $group = M('group_access')->where($where)->getField('group_id', true);
             $where = array(
