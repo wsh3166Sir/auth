@@ -71,7 +71,9 @@ class PublicController extends Controller
         $model = D('Admin');
         $data = $model->login();
         if($data){
+            //登陆后获取所属分组的id
             $str = self::_rules();
+            //查询默认跳转地址
             $where = array(
                 'id' => array('in',$str),
                 'level' => 0,
