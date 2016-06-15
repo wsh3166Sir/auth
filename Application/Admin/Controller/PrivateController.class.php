@@ -359,25 +359,26 @@ class PrivateController extends PublicController
     public function _top_menu()
     {
         $str = self::_rules();
-        $controller = CONTROLLER_NAME;
+        $module_name = MODULE_NAME;
         $where = array(
             'status'     => 1,
             'level'      => 2,
             'is_menu'    => 0,
-            'module'     => MODULE_NAME,
+            'module'     => $module_name,
             'controller' => CONTROLLER_NAME
         );
         if(UID != C('ADMINISTRATOR')){
             $where['id'] = array('in', $str);
         }
         $url = M('auth_cate')->where($where)->field('module,controller,method,title,name')->order('sort DESC')->select();
+        //检测控制器是不是等于Index
         if($controller == 'Index'){
             $arr = array(
-                'module'    => MODULE_NAME,
+                'module'    => $module_name,
                 'controller'=> 'Index',
                 'method'    => 'index',
                 'title'     => '站点信息',
-                'name'     => MODULE_NAME.'/Index/index'
+                'name'     => $module_name.'/Index/index'
             );
             array_unshift($url,$arr);
         }
@@ -392,8 +393,10 @@ class PrivateController extends PublicController
      **/
     public function _web_top_menu()
     {
+        $model = M('auth_cate');
         $str = self::_rules();
         $url = S('web_top_menu'.UID);
+        //检测缓存是否存在,如果不存在则生成缓存
         if($url == false){
             $where = array(
                 'status' => 1,
@@ -402,14 +405,14 @@ class PrivateController extends PublicController
             if(UID != C('ADMINISTRATOR')){
                 $where['id'] = array('in', $str);
             }
-            $dataArr = M('auth_cate')->where($where)->select();
+            $dataArr = $model->where($where)->select();
             $module = array();
             foreach ($dataArr as $key => $value) {
                 $where = array(
                     'pid'    => $value['id'],
                     'status' => 1
                 );
-                $res = M('auth_cate')->where($where)->getField('id');
+                $res = $model->where($where)->getField('id');
                 if($res){
                     $module[] = $value['id'];
                 }
@@ -419,16 +422,17 @@ class PrivateController extends PublicController
                     'id'     => array('in', $module),
                     'status' => 1
                 );
-                $url = M('auth_cate')->where($where)->field('id,title,module')->order('sort DESC')->select();
+                $url = $model->where($where)->field('id,title,module')->order('sort DESC')->select();
                 foreach ($url as $key => &$value) {
                     $where = array(
                         'pid'    => $value['id'],
                         'status' => 1
                     );
-                    $str = M('auth_cate')->where($where)->getField('module');
+                    $str = $model->where($where)->getField('module');
                     $value['url'] = U($str . '/Index/index',array('module'=>MODULE_NAME));
                 }
                 unset($value);
+                //生成缓存
                 S('web_top_menu'.UID,$url);
             }
         }
@@ -445,20 +449,20 @@ class PrivateController extends PublicController
      **/
     public function index()
     {
-        $group = MODULE_NAME;
-        $controller = CONTROLLER_NAME;
-        $url = $group . '/' . $controller;
         $where = array(
-            'name'   => $url,
+            'name'   => MODULE_NAME . '/' . CONTROLLER_NAME,
             'level'  => 1,
             'status' => 1
         );
-        $pid = M('auth_cate')->where($where)->getField('id');
+        $model = M('auth_cate');
+        //获取权限规则id
+        $pid   = $model->where($where)->getField('id');
+        //获取权限规则的上级id的名字
         $where = array(
             'pid'    => $pid,
             'status' => 1
         );
-        $info = M('auth_cate')->where($where)->getField('name');
+        $info = $model->where($where)->getField('name');
         $this->redirect($info);
     }
 
