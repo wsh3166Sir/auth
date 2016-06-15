@@ -1,6 +1,6 @@
 <?php
 // +----------------------------------------------------------------------
-// | 基于Thinkphp3.2.3开发的一款权限管理系统
+// | 后台管理员,系统分组,权限分配
 // +----------------------------------------------------------------------
 // | Copyright (c) www.php63.cc All rights reserved.
 // +----------------------------------------------------------------------
@@ -19,12 +19,13 @@ class AdminController extends PrivateController
     public function user()
     {
         $this->model = D('Admin');
+        //分配按钮
         $but = array(
             array(
                 'url'   => 'useredit',
                 'name'  => '添 加',
                 'title' => '添加管理员',
-                'type'  => 1
+                'type'  => 1 
             ),
         );
         self::isBut($but);

@@ -445,24 +445,28 @@ class PrivateController extends PublicController
     /**
      * 权限判断 所有一级菜单点击都进入这个方法
      * @author 刘中胜
-     * @time 2015-12-11
+     * @time 2016-06-15
      **/
     public function index()
     {
+        $str = self::_rules();
+        //获取当前控制器模块路径
         $where = array(
             'name'   => MODULE_NAME . '/' . CONTROLLER_NAME,
             'level'  => 1,
             'status' => 1
         );
-        $model = M('auth_cate');
-        //获取权限规则id
-        $pid   = $model->where($where)->getField('id');
-        //获取权限规则的上级id的名字
+        $pid = M('auth_cate')->where($where)->getField('id');
+        //拿到该模块控制器下拥有权限的第一条规则
         $where = array(
             'pid'    => $pid,
             'status' => 1
         );
-        $info = $model->where($where)->getField('name');
+        if(UID != C('ADMINISTRATOR')){
+            $where['id'] = array('in', $str);
+        }
+        $where['id'] = array('in',$str);
+        $info = M('auth_cate')->where($where)->getField('name');
         $this->redirect($info);
     }
 
