@@ -79,7 +79,7 @@ class PublicController extends Controller
                 'level' => 0,
                 'status' => 1
             );
-            $url = M('auth_cate')->where($where)->getField('module');
+            $url = M('auth_cate')->where($where)->order('sort DESC')->getField('module');
             $this->success('登录成功', U($url.'/Index/index'));
         }else{
             $this->error($model->getError());

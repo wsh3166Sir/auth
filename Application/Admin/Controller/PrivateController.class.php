@@ -465,7 +465,6 @@ class PrivateController extends PublicController
         if(UID != C('ADMINISTRATOR')){
             $where['id'] = array('in', $str);
         }
-        $where['id'] = array('in',$str);
         $info = M('auth_cate')->where($where)->getField('name');
         $this->redirect($info);
     }
