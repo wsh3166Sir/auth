@@ -9,69 +9,72 @@
 // | Author: 普罗米修斯 <996674366@qq.com>
 // +----------------------------------------------------------------------
 namespace Admin\Controller;
+
 use Think\Auth;
+
 class PrivateController extends PublicController
 {
     public $model = null;
     private $auth = null;
-	private $group_id = array();
-	/**
-	 * 初始化方法
-	 * @auth 普罗米修斯 www.php63.cc
-	 **/
+    private $group_id = array();
+
+    /**
+     * 初始化方法
+     * @auth 普罗米修斯 www.php63.cc
+     **/
     public function _initialize()
     {
-		//获取到当前用户所属所有分组拥有的权限id
-        $this -> group_id = self::_rules();
+        //获取到当前用户所属所有分组拥有的权限id
+        $this->group_id = self::_rules();
         $UserName = session(C('USERNAME'));
-		//检测后台管理员昵称是否存在，如果不等于空或者0则获取配置文件里定义的name名字并分配给首页
-        if(!empty($UserName)){
-            $this -> assign('UserName',session(C('USERNAME')));
+        //检测后台管理员昵称是否存在，如果不等于空或者0则获取配置文件里定义的name名字并分配给首页
+        if (!empty($UserName)) {
+            $this->assign('UserName', session(C('USERNAME')));
         }
-		//分配左边菜单
+        //分配左边菜单
         $this->_left_menu();
-		//分配列表上方菜单
+        //分配列表上方菜单
         $this->_top_menu();
-		//分配网站顶部菜单
+        //分配网站顶部菜单
         $this->_web_top_menu();
-		
-		//检测是否为超级管理员
-        if(UID == C('ADMINISTRATOR')){
+        //检测是否为超级管理员
+        if (UID == C('ADMINISTRATOR')) {
             return true;
         }
-		//读取缓存名为check_iskey+uid的缓存
-        $iskey = S('check_iskey'.UID);
+        //读取缓存名为check_iskey+uid的缓存
+        $iskey = S('check_iskey' . UID);
         $key = MODULE_NAME . '/' . CONTROLLER_NAME . '/' . ACTION_NAME;
-		//如果缓存等于false查询当前路径的规则id
-        if($iskey == false){
+        //如果缓存等于false查询当前路径的规则id
+        if ($iskey == false) {
             $where = array(
-                'name' => $key,
+                'name'   => $key,
                 'status' => 1
             );
             $iskey = M('auth_cate')->where($where)->getField('id');
-			//将结果写入缓存
-            S('check_iskey'.UID,$iskey);
+            //将结果写入缓存
+            S('check_iskey' . UID, $iskey);
         }
-		//检测该规则id是否存在于分组拥有的权限里
-		if(!in_array($iskey,$this -> group_id)){
-			$this->auth = new Auth();
-			if(!$this->auth->check($key, UID)){
-				$url = C('DEFAULTS_MODULE').'/Public/login';
-				//如果为ajax请求，则返回301，并且跳转到指定页面
-				if(IS_AJAX){
-					session('[destroy]');
-					$data = array(
-						'statusCode' => 301,
-						'url'        => $url
-					);
-					die(json_encode($data));
-				}else{
-					session('[destroy]');
-					$this->redirect($url);
-				}
-			}
-		}
+        //检测该规则id是否存在于分组拥有的权限里
+        if (!in_array($iskey, $this->group_id)) {
+            $this->auth = new Auth();
+            if (!$this->auth->check($key, UID)) {
+                $url = C('DEFAULTS_MODULE') . '/Public/login';
+                //如果为ajax请求，则返回301，并且跳转到指定页面
+                if (IS_AJAX) {
+                    session('[destroy]');
+                    $data = array(
+                        'statusCode' => 301,
+                        'url'        => $url
+                    );
+                    die(json_encode($data));
+                } else {
+                    session('[destroy]');
+                    $this->redirect($url);
+                }
+            }
+        }
     }
+
     /**
      * 添加编辑操作
      * @param string $model 要操作的表
@@ -80,13 +83,13 @@ class PrivateController extends PublicController
      * @return boolean
      * @author 刘中胜  <996674366@qq.com>
      */
-    protected function _modelAdd($url='',$typeid=0)
+    protected function _modelAdd($url = '', $typeid = 0)
     {
-        if(!$this->model){
+        if (!$this->model) {
             $this->error('请传入操作表名');
         }
         $data = $this->model->edit();
-        if($typeid == 1){
+        if ($typeid == 1) {
             return $data;
         }
         $data ? $this->success($data['id'] ? '更新成功' : '添加成功', U($url)) : $this->error($this->model->getError());
@@ -100,16 +103,16 @@ class PrivateController extends PublicController
      * @return mixed
      * @author 刘中胜  <996674366@qq.com>
      */
-    protected function _modelCount($where = array(), $type = 1,$num='')
+    protected function _modelCount($where = array(), $type = 1, $num = '')
     {
         $count = $this->model->total($where);
-        if($type == 1){
-            if($num == ''){
+        if ($type == 1) {
+            if ($num == '') {
                 $num = C('PAGENUM');
             }
-            $Page = self::_page($count,$num);
+            $Page = self::_page($count, $num);
             return $Page;
-        }else{
+        } else {
             return $count;
         }
     }
@@ -126,7 +129,7 @@ class PrivateController extends PublicController
      */
     protected function _modelSelect($where, $order, $field = "*", $limit = '')
     {
-        if(!$this->model){
+        if (!$this->model) {
             $this->error("表名未定义");
         }
         $list = $this->model->dataSet($where, $order, $field, $limit);
@@ -142,14 +145,14 @@ class PrivateController extends PublicController
      */
     protected function _del($url)
     {
-        if(!$this->model){
+        if (!$this->model) {
             $this->error("表名未定义");
         }
         $id = I('get.id', 0, 'intval');
         $res = $this->model->del($id);
-        if(!$res){
+        if (!$res) {
             $this->error($this->model->getError());
-        }else{
+        } else {
             delTemp();
             $this->success('删除成功', U($url));
         }
@@ -165,14 +168,14 @@ class PrivateController extends PublicController
      */
     protected function _oneInquire($where, $type = 1)
     {
-        if(!$this->model){
+        if (!$this->model) {
             $this->error("表名未定义");
         }
         $info = $this->model->oneInquire($where);
-        if(!$info){
+        if (!$info) {
             $this->error($this->model->getError());
         }
-        if($type == 1){
+        if ($type == 1) {
             return $this->assign('info', $info);
         }
         return $info;
@@ -184,20 +187,21 @@ class PrivateController extends PublicController
      * @param bool $type 是否退出 0是 1否
      * @return bool 成功返回true 否则跳转到登录页面
      */
-    protected function _is_check_url($url){
-        if(UID == C('ADMINISTRATOR')){
+    protected function _is_check_url($url)
+    {
+        if (UID == C('ADMINISTRATOR')) {
             return true;
         }
         $url = strtolower($url);
-        $url = MODULE_NAME.'/'.CONTROLLER_NAME.'/'.$url;
+        $url = MODULE_NAME . '/' . CONTROLLER_NAME . '/' . $url;
         $where = array(
-            'name'  => $url,
-            'status'=> 1
+            'name'   => $url,
+            'status' => 1
         );
         $id = M('auth_cate')->where($where)->getField('id');
-        if($id){
+        if ($id) {
             $this->auth = new Auth();
-            if($this->auth->check($url, UID)){
+            if ($this->auth->check($url, UID)) {
                 return true;
             }
             return false;
@@ -218,18 +222,18 @@ class PrivateController extends PublicController
     {
         $dataArr = array();
         foreach ($but as $Key => $value) {
-            if(self::_is_check_url($value['url'])){
-                if(!empty($value['parameter'])){
-                    $url = U($value['url'],$value['parameter']);
-                }else{
+            if (self::_is_check_url($value['url'])) {
+                if (!empty($value['parameter'])) {
+                    $url = U($value['url'], $value['parameter']);
+                } else {
                     $url = U($value['url']);
                 }
                 $title = $value['title'];
-                if($value['type'] == 1){
+                if ($value['type'] == 1) {
                     $href = 'JavaScript:;';
                     $target = 'popDialog';
                     $dataOpt = "{title:'" . "$title',url:'" . "$url'" . '}';
-                }else{
+                } else {
                     $href = $url;
                     $target = '';
                     $dataOpt = '';
@@ -257,22 +261,22 @@ class PrivateController extends PublicController
      **/
     protected function _catebut($url, $title, $id = 0, $msg = '', $type = 1)
     {
-        $res = self::_is_check_url($url,1);
-        if($res){
-            if($id != 0){
+        $res = self::_is_check_url($url, 1);
+        if ($res) {
+            if ($id != 0) {
                 $where = array(
                     'id' => $id
                 );
                 $url = U($url, $where);
-            }else{
+            } else {
                 $url = U($url);
             }
-            if($type == 1){
+            if ($type == 1) {
                 $butArr = array(
                     'data-opt' => "{title:'" . "$title',url:'" . "$url'" . '}',
                     'title'    => '添 加',
                 );
-            }else{
+            } else {
                 $butArr = array(
                     'data-opt' => "{title:'" . "$title',url:'" . "$url',msg:'" . "$msg'" . '}',
                     'title'    => '删 除',
@@ -296,10 +300,10 @@ class PrivateController extends PublicController
         $totalPage = ceil($count / $num);
         $currentPage = I('post.currentPage', 1, 'intval');
         $searchValue = I('post.searchValue', '');
-        if($currentPage > $totalPage){
+        if ($currentPage > $totalPage) {
             $currentPage = $totalPage;
         }
-        if($currentPage < 1){
+        if ($currentPage < 1) {
             $currentPage = 1;
         }
         $list = array(
@@ -322,14 +326,14 @@ class PrivateController extends PublicController
     public function _left_menu()
     {
         $url = S('left_menu');
-        if($url == false){
+        if ($url == false) {
             $where = array(
                 'status' => 1,
                 'level'  => 1,
                 'module' => MODULE_NAME
             );
-            if(UID != C('ADMINISTRATOR')){
-                $where['id'] = array('in', $this -> group_id);
+            if (UID != C('ADMINISTRATOR')) {
+                $where['id'] = array('in', $this->group_id);
             }
             $url = M('auth_cate')->where($where)->select();
             foreach ($url as $key => &$value) {
@@ -337,7 +341,7 @@ class PrivateController extends PublicController
                 $value['name'] = U($urls);
             }
             unset($value);
-            S('left_menu'.UID,$url);
+            S('left_menu' . UID, $url);
         }
         $this->assign('menu_url', $url);
     }
@@ -357,20 +361,20 @@ class PrivateController extends PublicController
             'module'     => $module_name,
             'controller' => CONTROLLER_NAME
         );
-        if(UID != C('ADMINISTRATOR')){
-            $where['id'] = array('in', $this -> group_id);
+        if (UID != C('ADMINISTRATOR')) {
+            $where['id'] = array('in', $this->group_id);
         }
         $url = M('auth_cate')->where($where)->field('module,controller,method,title,name')->order('sort DESC')->select();
         //检测控制器是不是等于Index
-        if($controller == 'Index'){
+        if ($controller == 'Index') {
             $arr = array(
-                'module'    => $module_name,
-                'controller'=> 'Index',
-                'method'    => 'index',
-                'title'     => '站点信息',
-                'name'     => $module_name.'/Index/index'
+                'module'     => $module_name,
+                'controller' => 'Index',
+                'method'     => 'index',
+                'title'      => '站点信息',
+                'name'       => $module_name . '/Index/index'
             );
-            array_unshift($url,$arr);
+            array_unshift($url, $arr);
         }
         $this->assign('top_menu_url', $url);
     }
@@ -384,15 +388,15 @@ class PrivateController extends PublicController
     public function _web_top_menu()
     {
         $model = M('auth_cate');
-        $url = S('web_top_menu'.UID);
+        $url = S('web_top_menu' . UID);
         //检测缓存是否存在,如果不存在则生成缓存
-        if($url == false){
+        if ($url == false) {
             $where = array(
                 'status' => 1,
                 'level'  => 0,
             );
-            if(UID != C('ADMINISTRATOR')){
-                $where['id'] = array('in', $this -> group_id);
+            if (UID != C('ADMINISTRATOR')) {
+                $where['id'] = array('in', $this->group_id);
             }
             $dataArr = $model->where($where)->select();
             $module = array();
@@ -402,11 +406,11 @@ class PrivateController extends PublicController
                     'status' => 1
                 );
                 $res = $model->where($where)->getField('id');
-                if($res){
+                if ($res) {
                     $module[] = $value['id'];
                 }
             }
-            if(!empty($module)){
+            if (!empty($module)) {
                 $where = array(
                     'id'     => array('in', $module),
                     'status' => 1
@@ -418,14 +422,14 @@ class PrivateController extends PublicController
                         'status' => 1
                     );
                     $str = $model->where($where)->getField('module');
-                    $value['url'] = U($str . '/Index/index',array('module'=>MODULE_NAME));
+                    $value['url'] = U($str . '/Index/index', array('module' => MODULE_NAME));
                 }
                 unset($value);
                 //生成缓存
-                S('web_top_menu'.UID,$url);
+                S('web_top_menu' . UID, $url);
             }
         }
-        if(count($url) > 1){
+        if (count($url) > 1) {
             $this->assign('web_top_menu_url', $url);
         }
     }
@@ -450,8 +454,8 @@ class PrivateController extends PublicController
             'pid'    => $pid,
             'status' => 1
         );
-        if(UID != C('ADMINISTRATOR')){
-            $where['id'] = array('in', $this -> group_id);
+        if (UID != C('ADMINISTRATOR')) {
+            $where['id'] = array('in', $this->group_id);
         }
         $info = M('auth_cate')->where($where)->getField('name');
         $this->redirect($info);
@@ -465,16 +469,16 @@ class PrivateController extends PublicController
      * @author 刘中胜
      * @time 2016-01-21
      **/
-    public function _cateList($model, $title, $sort='',$cache='')
+    public function _cateList($model, $title, $sort = '', $cache = '')
     {
-        $list = S($cache.UID);
-        if($list == false){
+        $list = S($cache . UID);
+        if ($list == false) {
             $this->model = D($model);
             $where = array(
                 'status' => 1
             );
             $list = self::_modelSelect($where, $sort);
-            if(!$list){
+            if (!$list) {
                 $list = array();
             }
             $arr = array(
@@ -486,7 +490,7 @@ class PrivateController extends PublicController
             );
             array_unshift($list, $arr);
             $list = json_encode($list);
-            S($cache.UID,$list);
+            S($cache . UID, $list);
         }
         $this->assign('list', $list);
     }
@@ -497,24 +501,24 @@ class PrivateController extends PublicController
      * type 1弹出层 2删除 3审核 4直接打开
      * @author 刘中胜
      **/
-    protected function  _listBut($data)
+    protected function _listBut($data)
     {
         $dataArr = array();
         foreach ($data as $key => $value) {
-            if(self::_is_check_url($value[3])){
-                $dataArr[$key]['name']=$value[0];
-                $dataArr[$key]['opt']['title']=$value[2];
-                $dataArr[$key]['opt']['url']=$value[4];
+            if (self::_is_check_url($value[3])) {
+                $dataArr[$key]['name'] = $value[0];
+                $dataArr[$key]['opt']['title'] = $value[2];
+                $dataArr[$key]['opt']['url'] = $value[4];
                 switch ($value[1]) {
                     case 1://弹出层
                         $dataArr[$key]['target'] = 'popDialog';
                         break;
                     case 2:
-                        $dataArr[$key]['opt']['msg']=$value[5];
+                        $dataArr[$key]['opt']['msg'] = $value[5];
                         $dataArr[$key]['target'] = 'ajaxDel';
                         break;
                     case 3:
-                        $dataArr[$key]['opt']['msg']=$value[5];
+                        $dataArr[$key]['opt']['msg'] = $value[5];
                         $dataArr[$key]['target'] = 'ajaxTodo';
                         $dataArr[$key]['opt']['value'] = $value[7];
                         $dataArr[$key]['opt']['type'] = $value[6];
@@ -534,14 +538,14 @@ class PrivateController extends PublicController
      **/
     protected function _delcate($url)
     {
-        if(!$this->model){
+        if (!$this->model) {
             $this->error("表名未定义");
         }
-        $res = $this -> model ->delcate();
-        if($res){
-            $this -> success('操作成功',U($url));
-        }else{
-            $this -> error($this -> model->getError());
+        $res = $this->model->delcate();
+        if ($res) {
+            $this->success('操作成功', U($url));
+        } else {
+            $this->error($this->model->getError());
         }
     }
 }

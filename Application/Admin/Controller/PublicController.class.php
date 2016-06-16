@@ -9,7 +9,9 @@
 // | Author: 普罗米修斯 <996674366@qq.com>
 // +----------------------------------------------------------------------
 namespace Admin\Controller;
+
 use Think\Controller;
+
 class PublicController extends Controller
 {
     /**
@@ -36,7 +38,7 @@ class PublicController extends Controller
      * @author 刘中胜
      * @time 2015-15-05
      **/
-    protected function error($message='')
+    protected function error($message = '')
     {
         $array = array(
             'statusCode' => 300,
@@ -46,7 +48,6 @@ class PublicController extends Controller
     }
 
 
-
     /**
      * login 登录页面
      * @author 刘中胜
@@ -54,9 +55,9 @@ class PublicController extends Controller
      **/
     public function login()
     {
-        if(session(C('ADMIN_UID'))){
-            $this->redirect(C('DEFAULTS_MODULE').'Index/index');
-        }else{
+        if (session(C('ADMIN_UID'))) {
+            $this->redirect(C('DEFAULTS_MODULE') . 'Index/index');
+        } else {
             $this->display();
         }
     }
@@ -70,18 +71,18 @@ class PublicController extends Controller
     {
         $model = D('Admin');
         $data = $model->login();
-        if($data){
+        if ($data) {
             //登陆后获取所属分组的id
             $str = self::_rules();
             //查询默认跳转地
             $where = array(
-                'id' => array('in',$str),
-                'level' => 0,
+                'id'     => array('in', $str),
+                'level'  => 0,
                 'status' => 1
             );
             $url = M('auth_cate')->where($where)->order('sort DESC')->getField('module');
-            $this->success('登录成功', U($url.'/Index/index'));
-        }else{
+            $this->success('登录成功', U($url . '/Index/index'));
+        } else {
             $this->error($model->getError());
         }
     }
@@ -104,7 +105,7 @@ class PublicController extends Controller
     public function logout()
     {
         session(C('ADMIN_UID'), null);
-        $this->redirect(C('DEFAULTS_MODULE').'/Public/login');
+        $this->redirect(C('DEFAULTS_MODULE') . '/Public/login');
     }
 
     /**
@@ -133,23 +134,23 @@ class PublicController extends Controller
         $model = M();
         $model->startTrans();
         $char = randNum();
-        $id = I('post.id',0,'intval');
-        if(empty($id)){
-             $this->error('参数错误');
+        $id = I('post.id', 0, 'intval');
+        if (empty($id)) {
+            $this->error('参数错误');
         }
         $password = trim(I('post.password'));
-        if($password == ''){
-             $this->error('原始密码不能为空');
+        if ($password == '') {
+            $this->error('原始密码不能为空');
         }
         $new_pwd = trim(I('post.new_pwd'));
-        if($new_pwd == ''){
+        if ($new_pwd == '') {
             $this->error('新密码不能为空');
         }
         $rep_new_pwd = trim(I('post.rep_new_pwd'));
-        if($rep_new_pwd == ''){
+        if ($rep_new_pwd == '') {
             $this->error('确认密码不能为空');
         }
-        if($new_pwd != $rep_new_pwd){
+        if ($new_pwd != $rep_new_pwd) {
             $this->error('两次密码不一致');
         }
 
@@ -162,7 +163,7 @@ class PublicController extends Controller
             'status'   => 1
         );
         $user = M('admin')->where($where)->getField('id');
-        if(!$user){
+        if (!$user) {
             $this->error('原始密码错误');
         }
         $pwd = md5Encrypt($new_pwd, $char);
@@ -172,25 +173,26 @@ class PublicController extends Controller
             'password' => $pwd,
         );
         $res = M('admin')->where($where)->save($data);
-        if($res){
+        if ($res) {
             $data = array(
                 'chars' => $char,
                 'id'    => $id
             );
             $res = M('char')->save($data);
-            if($res === false){
+            if ($res === false) {
                 $model->rollback();
                 $this->error('修改失败');
-            }else{
+            } else {
                 $model->commit();
-                session(C('ADMIN_UID'), NULL);
+                session(C('ADMIN_UID'), null);
                 $this->success('修改成功', U('Public/login'));
             }
-        }else{
+        } else {
             $model->rollback();
             $this->error('修改失败');
         }
     }
+
     /**
      * 分组权限查询
      * @author 普罗米修斯 www.php63.cc
@@ -199,102 +201,104 @@ class PublicController extends Controller
     protected function _rules()
     {
         $uid = session(C('ADMIN_UID'));
-        if(empty($uid)){
-            $this->redirect(C('DEFAULTS_MODULE').'/Public/login');
+        if (empty($uid)) {
+            $this->redirect(C('DEFAULTS_MODULE') . '/Public/login');
         }
         //将uid定义为常量方便后期统一使用
         defined("UID") or define("UID", $uid);
-        $str = S('group_rules'.$uid);
-        if($str == false){
-            if($uid == C('ADMINISTRATOR')){
+        $str = S('group_rules' . $uid);
+        if ($str == false) {
+            if ($uid == C('ADMINISTRATOR')) {
                 $group = M('group_access')->getField('group_id', true);
-            }else{
+            } else {
                 $where = array(
                     'uid' => $uid
                 );
                 $group = M('group_access')->where($where)->getField('group_id', true);
-                if(empty($group)){
-                    $this -> error('登陆失败,权限不足');
-                    session(C('ADMIN_UID'),null);
+                if (empty($group)) {
+                    $this->error('登陆失败,权限不足');
+                    session(C('ADMIN_UID'), null);
                     $this->redirect('Admin/Public/login');
                 }
             }
             $where = array(
-              'id'     => array('in', $group),
-              'status' => 1
+                'id'     => array('in', $group),
+                'status' => 1
             );
             $list = M('group')->where($where)->getField('rules', true);
-            if(empty($list[0])){
-                $this->redirect(C('DEFAULTS_MODULE').'/Public/login');
+            if (empty($list[0])) {
+                $this->redirect(C('DEFAULTS_MODULE') . '/Public/login');
             }
             $str = implode(',', $list);
             $strArr = explode(',', $str);
             $str = array_unique($strArr);
-            S('group_rules'.$uid,$str);
+            S('group_rules' . $uid, $str);
         }
         return $str;
     }
+
     /**
      * flashupload 上传方法
      * @author 刘中胜
      * @time 2015-3-17
      **/
-    public function flashupload(){
-        $upload           = new \Think\Upload();
-        $upload->maxSize  = 31457280000;
-        $upload->exts     = array('jpg', 'gif', 'png', 'jpeg');
-        $rootPath         = $upload->rootPath = './Upload/';
-        $upload->autoSub  = false;
+    public function flashupload()
+    {
+        $upload = new \Think\Upload();
+        $upload->maxSize = 31457280000;
+        $upload->exts = array('jpg', 'gif', 'png', 'jpeg');
+        $rootPath = $upload->rootPath = './Upload/';
+        $upload->autoSub = false;
         $upload->savePath = date('Y/md/');
-        $info             = $upload->upload();
-        if(!$info){
+        $info = $upload->upload();
+        if (!$info) {
             header("HTTP/1.1 500 Internal Server Error");
             echo $upload->getError();
             exit(0);
         }
-		//接受上传类型
-		$upload_type = I('get.type');
-		//如果上传类型不是文件则执行如下代码
-		if($upload_type != 'file'){
-			$imgSrc    = $rootPath.$info['Filedata']['savepath'].$info['Filedata']['savename'];
-			$widthArr  = explode(',', I('get.width', '','trim'));
-			$heightArr = explode(',', I('get.height', '','trim'));
-			$resArr    = array();
+        //接受上传类型
+        $upload_type = I('get.type');
+        //如果上传类型不是文件则执行如下代码
+        if ($upload_type != 'file') {
+            $imgSrc = $rootPath . $info['Filedata']['savepath'] . $info['Filedata']['savename'];
+            $widthArr = explode(',', I('get.width', '', 'trim'));
+            $heightArr = explode(',', I('get.height', '', 'trim'));
+            $resArr = array();
 
-			if(!empty($widthArr)){
-				$image = new \Think\Image();
-				//图片裁剪
-				foreach($widthArr as $key=>$w){
-					$w = trim($w);
-					$h = trim($heightArr[$key]);
-					$image->open($imgSrc);
-					$thumbName =  $rootPath.$info['Filedata']['savepath']."thumb/{$w}x{$h}/".$info['Filedata']['savename'];
-					if(!is_dir(dirname($thumbName))){
-						mkdir(dirname($thumbName), 0755, true);
-					}
-					$image -> thumb($w, $h, 3)
-						-> save($thumbName,$info['ext'],100);
-						$watermark = I('get.watermark',0,'intval');
-						//检测是否打水印如果等于1则代表需要打水印，
-						if($watermark == 1){
-							$waterMarkImg = C('WATER_MARK_IMG');
-							$warerMarkPos = C('WATER_MARK_POS');
-							if(!is_array($warerMarkPos)){
-								$warerMarkPos = array(9);
-							}
-							foreach ($warerMarkPos as $value) {
-								$image->open($thumbName)->water($waterMarkImg, $value)->save($thumbName);
-							}
-						}
-					if(!isset($resArr['thumb'])){
-						$resArr['thumb'] = ltrim($thumbName, '.');
-					}
-				}
-			}
-			if(!isset($resArr['thumb'])){
-				$resArr = ltrim($imgSrc, '.');
-			}
-		}
+            if (!empty($widthArr)) {
+                $image = new \Think\Image();
+                //图片裁剪
+                foreach ($widthArr as $key => $w) {
+                    $w = trim($w);
+                    $h = trim($heightArr[$key]);
+                    $image->open($imgSrc);
+                    $thumbName = $rootPath . $info['Filedata']['savepath'] . "thumb/{$w}x{$h}/" . $info['Filedata']['savename'];
+                    if (!is_dir(dirname($thumbName))) {
+                        mkdir(dirname($thumbName), 0755, true);
+                    }
+                    $image->thumb($w, $h, 3)
+                        ->save($thumbName, $info['ext'], 100);
+                    $watermark = I('get.watermark', 0, 'intval');
+                    //检测是否打水印如果等于1则代表需要打水印，
+                    if ($watermark == 1) {
+                        $waterMarkImg = C('WATER_MARK_IMG');
+                        $warerMarkPos = C('WATER_MARK_POS');
+                        if (!is_array($warerMarkPos)) {
+                            $warerMarkPos = array(9);
+                        }
+                        foreach ($warerMarkPos as $value) {
+                            $image->open($thumbName)->water($waterMarkImg, $value)->save($thumbName);
+                        }
+                    }
+                    if (!isset($resArr['thumb'])) {
+                        $resArr['thumb'] = ltrim($thumbName, '.');
+                    }
+                }
+            }
+            if (!isset($resArr['thumb'])) {
+                $resArr = ltrim($imgSrc, '.');
+            }
+        }
         $resArr['img'] = ltrim($imgSrc, '.');
         die(json_encode($resArr));
     }
@@ -304,30 +308,31 @@ class PublicController extends Controller
      * @author 刘中胜
      * @time 2015-04-29
      **/
-    public function editUpload(){
+    public function editUpload()
+    {
         $upload = new \Think\Upload();// 实例化上传类
-        $upload->maxSize   =     3145728 ;// 设置附件上传大小
-        $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
-        $rootPath = $upload->rootPath  =     './Upload/'; // 设置附件上传根目录
-        $upload->savePath  =     ''; // 设置附件上传（子）目录
-        $upload->autoSub  = true;
-        $upload->subName  = array('date','Y/m/d');
+        $upload->maxSize = 3145728;// 设置附件上传大小
+        $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+        $rootPath = $upload->rootPath = './Upload/'; // 设置附件上传根目录
+        $upload->savePath = ''; // 设置附件上传（子）目录
+        $upload->autoSub = true;
+        $upload->subName = array('date', 'Y/m/d');
         // 上传文件
-        $info   =   $upload->upload();
+        $info = $upload->upload();
         $arr = array();
-        if(!$info){
+        if (!$info) {
 
-            $arr['state']           = 'ERROR';
-        }else{
+            $arr['state'] = 'ERROR';
+        } else {
             $infos = $info['upfile'];
-            $savePath = ltrim($infos['savepath'],'.');
-            $filePathName = '/Upload/'.$savePath.$infos['savename'];
-            $arr['originalName']    = $infos['name'];
-            $arr['name']            = $infos['savename'];
-            $arr['url']             = $filePathName;
-            $arr['size']            = $infos['size'];
-            $arr['type']            = $infos['ext'];
-            $arr['state']           = 'SUCCESS';
+            $savePath = ltrim($infos['savepath'], '.');
+            $filePathName = '/Upload/' . $savePath . $infos['savename'];
+            $arr['originalName'] = $infos['name'];
+            $arr['name'] = $infos['savename'];
+            $arr['url'] = $filePathName;
+            $arr['size'] = $infos['size'];
+            $arr['type'] = $infos['ext'];
+            $arr['state'] = 'SUCCESS';
         }
         die(json_encode($arr));
     }
