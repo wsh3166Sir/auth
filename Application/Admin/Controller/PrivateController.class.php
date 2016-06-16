@@ -21,14 +21,8 @@ class PrivateController extends PublicController
 	 **/
     public function _initialize()
     {
-		//获取uid， 注：为了方便后期统一修改，在配置文件里新增一项 'UID' => 'uid'
-        $uid = session(C('UID'));
-		//检测session是否存在如果不存在跳转到默认模块
-        if($uid == null){
-            $this->redirect(C('DEFAULTS_MODULE').'/Public/login');
-        }
-		//将uid定义为常量方便后期统一使用
-        defined("UID") or define("UID", $uid);
+		//获取到当前用户所属所有分组拥有的权限id
+        $groupids = self::_rules();
         $UserName = session(C('USERNAME'));
 		//检测后台管理员昵称是否存在，如果不等于空或者0则获取配置文件里定义的name名字并分配给首页
         if(!empty($UserName)){
@@ -40,8 +34,7 @@ class PrivateController extends PublicController
         $this->_top_menu();
 		//分配网站顶部菜单
         $this->_web_top_menu();
-		//获取到当前用户所属所有分组拥有的权限id
-        $groupids = self::_rules();
+		
 		//检测是否为超级管理员
         if(UID == C('ADMINISTRATOR')){
             return true;

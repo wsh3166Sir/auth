@@ -202,6 +202,8 @@ class PublicController extends Controller
         if(empty($uid)){
             $this->redirect(C('DEFAULTS_MODULE').'/Public/login');
         }
+        //将uid定义为常量方便后期统一使用
+        defined("UID") or define("UID", $uid);
         $str = S('group_rules'.$uid);
         if($str == false){
             if($uid == C('ADMINISTRATOR')){
