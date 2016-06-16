@@ -55,7 +55,7 @@ class PublicController extends Controller
     public function login()
     {
         if(session(C('ADMIN_UID'))){
-            $this->redirect(C('DEFAULTS_MODULE').'Index/index');
+            $this->redirect(C('DEFAULTS_MODULE').'/Index/index');
         }else{
             $this->display();
         }
@@ -198,7 +198,7 @@ class PublicController extends Controller
      **/
     protected function _rules()
     {
-        $uid = session(C('ADMIN_UID'));
+        $uid = session(C('UID'));
         if(empty($uid)){
             $this->redirect(C('DEFAULTS_MODULE').'/Public/login');
         }
@@ -215,16 +215,18 @@ class PublicController extends Controller
                 $group = M('group_access')->where($where)->getField('group_id', true);
                 if(empty($group)){
                     $this -> error('登陆失败,权限不足');
-                    session(C('ADMIN_UID'),null);
-                    $this->redirect('Admin/Public/login');
+                    session(C('uid'),null);
+                    $this->redirect(C('DEFAULTS_MODULE').'Admin/Public/login');
                 }
             }
             $where = array(
-              'id'     => array('in', $group),
-              'status' => 1
+                'id'     => array('in', $group),
+                'status' => 1
             );
             $list = M('group')->where($where)->getField('rules', true);
             if(empty($list[0])){
+                $this -> error('登陆失败,权限不足');
+                session(C('uid'),null);
                 $this->redirect(C('DEFAULTS_MODULE').'/Public/login');
             }
             $str = implode(',', $list);
