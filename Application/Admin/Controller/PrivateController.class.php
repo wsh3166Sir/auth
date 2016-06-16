@@ -14,7 +14,7 @@ class PrivateController extends PublicController
 {
     public $model = null;
     private $auth = null;
-	
+	private $group_id = array();
 	/**
 	 * 初始化方法
 	 * @auth 普罗米修斯 www.php63.cc
@@ -22,7 +22,7 @@ class PrivateController extends PublicController
     public function _initialize()
     {
 		//获取到当前用户所属所有分组拥有的权限id
-        $groupids = self::_rules();
+        $this -> group_id = self::_rules();
         $UserName = session(C('USERNAME'));
 		//检测后台管理员昵称是否存在，如果不等于空或者0则获取配置文件里定义的name名字并分配给首页
         if(!empty($UserName)){
@@ -53,7 +53,7 @@ class PrivateController extends PublicController
             S('check_iskey'.UID,$iskey);
         }
 		//检测该规则id是否存在于分组拥有的权限里
-		if(!in_array($iskey,$groupids)){
+		if(!in_array($iskey,$this -> $group_id)){
 			$this->auth = new Auth();
 			if(!$this->auth->check($key, UID)){
 				$url = C('DEFAULTS_MODULE').'/Public/login';
@@ -188,7 +188,6 @@ class PrivateController extends PublicController
         if(UID == C('ADMINISTRATOR')){
             return true;
         }
-        $groupids = self::_rules();
         $url = strtolower($url);
         $url = MODULE_NAME.'/'.CONTROLLER_NAME.'/'.$url;
         $where = array(
@@ -322,7 +321,6 @@ class PrivateController extends PublicController
      **/
     public function _left_menu()
     {
-        $str = self::_rules();
         $url = S('left_menu');
         if($url == false){
             $where = array(
@@ -331,7 +329,7 @@ class PrivateController extends PublicController
                 'module' => MODULE_NAME
             );
             if(UID != C('ADMINISTRATOR')){
-                $where['id'] = array('in', $str);
+                $where['id'] = array('in', $this -> group_id);
             }
             $url = M('auth_cate')->where($where)->select();
             foreach ($url as $key => &$value) {
@@ -351,7 +349,6 @@ class PrivateController extends PublicController
      **/
     public function _top_menu()
     {
-        $str = self::_rules();
         $module_name = MODULE_NAME;
         $where = array(
             'status'     => 1,
@@ -361,7 +358,7 @@ class PrivateController extends PublicController
             'controller' => CONTROLLER_NAME
         );
         if(UID != C('ADMINISTRATOR')){
-            $where['id'] = array('in', $str);
+            $where['id'] = array('in', $this -> group_id);
         }
         $url = M('auth_cate')->where($where)->field('module,controller,method,title,name')->order('sort DESC')->select();
         //检测控制器是不是等于Index
@@ -387,7 +384,6 @@ class PrivateController extends PublicController
     public function _web_top_menu()
     {
         $model = M('auth_cate');
-        $str = self::_rules();
         $url = S('web_top_menu'.UID);
         //检测缓存是否存在,如果不存在则生成缓存
         if($url == false){
@@ -396,7 +392,7 @@ class PrivateController extends PublicController
                 'level'  => 0,
             );
             if(UID != C('ADMINISTRATOR')){
-                $where['id'] = array('in', $str);
+                $where['id'] = array('in', $this -> group_id);
             }
             $dataArr = $model->where($where)->select();
             $module = array();
@@ -442,7 +438,6 @@ class PrivateController extends PublicController
      **/
     public function index()
     {
-        $str = self::_rules();
         //获取当前控制器模块路径
         $where = array(
             'name'   => MODULE_NAME . '/' . CONTROLLER_NAME,
@@ -456,7 +451,7 @@ class PrivateController extends PublicController
             'status' => 1
         );
         if(UID != C('ADMINISTRATOR')){
-            $where['id'] = array('in', $str);
+            $where['id'] = array('in', $this -> group_id);
         }
         $info = M('auth_cate')->where($where)->getField('name');
         $this->redirect($info);
