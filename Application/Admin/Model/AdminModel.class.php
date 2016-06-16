@@ -170,7 +170,7 @@ class AdminModel extends \Common\Model\PublicModel
                 'last_ip'   => get_client_ip()
             );
             $this->where($where)->save($lastData);
-            session(C('UID'), $res['id']);
+            session(C('ADMIN_UID'), $res['id']);
             session(C('USERNAME'), $res['name']);
             return $res;
         }else{

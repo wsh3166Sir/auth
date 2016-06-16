@@ -54,7 +54,7 @@ class PublicController extends Controller
      **/
     public function login()
     {
-        if(session(C('UID'))){
+        if(session(C('ADMIN_UID'))){
             $this->redirect(C('DEFAULTS_MODULE').'Index/index');
         }else{
             $this->display();
@@ -73,7 +73,7 @@ class PublicController extends Controller
         if($data){
             //登陆后获取所属分组的id
             $str = self::_rules();
-            //查询默认跳转地址
+            //查询默认跳转地
             $where = array(
                 'id' => array('in',$str),
                 'level' => 0,
@@ -103,7 +103,7 @@ class PublicController extends Controller
      **/
     public function logout()
     {
-        session(C('uid'), null);
+        session(C('ADMIN_UID'), null);
         $this->redirect(C('DEFAULTS_MODULE').'/Public/login');
     }
 
@@ -115,7 +115,7 @@ class PublicController extends Controller
     public function resetpwd()
     {
         $where = array(
-            'id'     => session(C('UID')),
+            'id'     => session(C('ADMIN_UID')),
             'status' => 1
         );
         $uid = M('admin')->where($where)->getField('id');
@@ -183,7 +183,7 @@ class PublicController extends Controller
                 $this->error('修改失败');
             }else{
                 $model->commit();
-                session(C('UID'), NULL);
+                session(C('ADMIN_UID'), NULL);
                 $this->success('修改成功', U('Public/login'));
             }
         }else{
@@ -198,7 +198,7 @@ class PublicController extends Controller
      **/
     protected function _rules()
     {
-        $uid = session(C('UID'));
+        $uid = session(C('ADMIN_UID'));
         if(empty($uid)){
             $this->redirect(C('DEFAULTS_MODULE').'/Public/login');
         }
@@ -215,7 +215,7 @@ class PublicController extends Controller
                 $group = M('group_access')->where($where)->getField('group_id', true);
                 if(empty($group)){
                     $this -> error('登陆失败,权限不足');
-                    session(C('uid'),null);
+                    session(C('ADMIN_UID'),null);
                     $this->redirect('Admin/Public/login');
                 }
             }

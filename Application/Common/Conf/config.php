@@ -38,7 +38,7 @@ return array(
     'SHOW_PAGE_TRACE'       => true, //开启调试,上线后删除
 	'DATA_CACHE_PREFIX'     =>  'think_auth_',     // 缓存前缀
 	//'DATA_CACHE_TYPE'       => '',
-    'UID'                   => 'uid',
+    'ADMIN_UID'                   => 'admin_uid',
     'ADMINISTRATOR'         => 1,
     'PAGENUM'               => 20, //默认展示条数
     'ADMINISTRATOR'         => 1,
