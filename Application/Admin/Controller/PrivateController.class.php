@@ -53,7 +53,7 @@ class PrivateController extends PublicController
             S('check_iskey'.UID,$iskey);
         }
 		//检测该规则id是否存在于分组拥有的权限里
-		if(!in_array($iskey,$this -> $group_id)){
+		if(!in_array($iskey,$this -> group_id)){
 			$this->auth = new Auth();
 			if(!$this->auth->check($key, UID)){
 				$url = C('DEFAULTS_MODULE').'/Public/login';
