@@ -38,11 +38,14 @@ class AdminModel extends \Common\Model\PublicModel
             return false;
         }
         $group = I('post.group_id');
+        if(empty($group)){
+            $this -> error = '请选择所属分组';
+            return false;
+        }
         $groupArr = array();
         $char = randNum();
         if(empty($data['id'])){
             $data['password'] = md5Encrypt(trim($data['password']), $char);
-
             $where = array(
                 'username' => trim($data['username']),
                 'status'   => 1,
