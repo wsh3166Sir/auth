@@ -193,29 +193,44 @@ class PublicController extends Controller
     }
     /**
      * 分组权限查询
-     * @author 刘中胜
+     * @author 普罗米修斯 www.php63.cc
      * @return array $str 返回查询到的权限
      **/
     protected function _rules()
     {
-        $str = S('group_rules'.UID);
+        $uid = session(C('UID'));
+        if(empty($uid)){
+            $this->redirect(C('DEFAULTS_MODULE').'/Public/login');
+        }
+        $str = S('group_rules'.$uid);
         if($str == false){
-            $where = array(
-                'uid' => UID
-            );
-            $group = M('group_access')->where($where)->getField('group_id', true);
+            if($uid == C('ADMINISTRATOR')){
+                $group = M('group_access')->getField('group_id', true);
+            }else{
+                $where = array(
+                    'uid' => $uid
+                );
+                $group = M('group_access')->where($where)->getField('group_id', true);
+                if(empty($group)){
+                    $this -> error('登陆失败,权限不足');
+                    session(C('uid'),null);
+                    $this->redirect('Admin/Public/login');
+                }
+            }
             $where = array(
               'id'     => array('in', $group),
               'status' => 1
             );
             $list = M('group')->where($where)->getField('rules', true);
+            if(empty($list[0])){
+                $this->redirect(C('DEFAULTS_MODULE').'/Public/login');
+            }
             $str = implode(',', $list);
             $strArr = explode(',', $str);
             $str = array_unique($strArr);
-            S('group_rules'.UID,$str);
+            S('group_rules'.$uid,$str);
         }
         return $str;
-
     }
     /**
      * flashupload 上传方法
