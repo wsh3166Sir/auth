@@ -55,9 +55,9 @@ class PublicController extends Controller
      **/
     public function login()
     {
-        if (session(C('ADMIN_UID'))) {
-            $this->redirect(C('DEFAULTS_MODULE') . 'Index/index');
-        } else {
+        if(session(C('ADMIN_UID'))){
+            $this->redirect(C('DEFAULTS_MODULE').'/Index/index');
+        }else{
             $this->display();
         }
     }

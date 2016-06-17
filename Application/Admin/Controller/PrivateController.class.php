@@ -73,6 +73,28 @@ class PrivateController extends PublicController
                 }
             }
         }
+<<<<<<< HEAD
+=======
+		//检测该规则id是否存在于分组拥有的权限里
+		if(!empty($iskey) && !in_array($iskey,$this -> group_id)){
+			$this->auth = new Auth();
+			if(!$this->auth->check($key, UID)){
+				$url = C('DEFAULTS_MODULE').'/Public/login';
+				//如果为ajax请求，则返回301，并且跳转到指定页面
+				if(IS_AJAX){
+					session('[destroy]');
+					$data = array(
+						'statusCode' => 301,
+						'url'        => $url
+					);
+					die(json_encode($data));
+				}else{
+					session('[destroy]');
+					$this->redirect($url);
+				}
+			}
+		}
+>>>>>>> origin/master
     }
 
     /**
