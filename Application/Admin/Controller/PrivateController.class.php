@@ -54,27 +54,7 @@ class PrivateController extends PublicController
             //将结果写入缓存
             S('check_iskey' . UID, $iskey);
         }
-        //检测该规则id是否存在于分组拥有的权限里
-        if (!in_array($iskey, $this->group_id)) {
-            $this->auth = new Auth();
-            if (!$this->auth->check($key, UID)) {
-                $url = C('DEFAULTS_MODULE') . '/Public/login';
-                //如果为ajax请求，则返回301，并且跳转到指定页面
-                if (IS_AJAX) {
-                    session('[destroy]');
-                    $data = array(
-                        'statusCode' => 301,
-                        'url'        => $url
-                    );
-                    die(json_encode($data));
-                } else {
-                    session('[destroy]');
-                    $this->redirect($url);
-                }
-            }
-        }
-<<<<<<< HEAD
-=======
+
 		//检测该规则id是否存在于分组拥有的权限里
 		if(!empty($iskey) && !in_array($iskey,$this -> group_id)){
 			$this->auth = new Auth();
@@ -94,7 +74,6 @@ class PrivateController extends PublicController
 				}
 			}
 		}
->>>>>>> origin/master
     }
 
     /**
@@ -376,6 +355,7 @@ class PrivateController extends PublicController
     public function _top_menu()
     {
         $module_name = MODULE_NAME;
+        $controller  = CONTROLLER_NAME;
         $where = array(
             'status'     => 1,
             'level'      => 2,
