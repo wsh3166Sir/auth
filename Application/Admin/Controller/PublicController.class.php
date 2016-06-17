@@ -218,7 +218,7 @@ class PublicController extends Controller
                 if (empty($group)) {
                     $this->error('登陆失败,权限不足');
                     session(C('ADMIN_UID'), null);
-                    $this->redirect('Admin/Public/login');
+                    $this->redirect(C('DEFAULTS_MODULE') . '/Public/login');
                 }
             }
             $where = array(
@@ -227,6 +227,8 @@ class PublicController extends Controller
             );
             $list = M('group')->where($where)->getField('rules', true);
             if (empty($list[0])) {
+                $this->error('登陆失败,权限不足');
+                session(C('ADMIN_UID'), null);
                 $this->redirect(C('DEFAULTS_MODULE') . '/Public/login');
             }
             $str = implode(',', $list);
