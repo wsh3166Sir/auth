@@ -361,7 +361,7 @@ class PrivateController extends PublicController
             'level'      => 2,
             'is_menu'    => 0,
             'module'     => $module_name,
-            'controller' => CONTROLLER_NAME
+            'controller' => $controller
         );
         if (UID != C('ADMINISTRATOR')) {
             $where['id'] = array('in', $this->group_id);
