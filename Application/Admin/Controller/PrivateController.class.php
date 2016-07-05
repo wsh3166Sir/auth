@@ -336,7 +336,7 @@ class PrivateController extends PublicController
             if (UID != C('ADMINISTRATOR')) {
                 $where['id'] = array('in', $this->group_id);
             }
-            $url = M('auth_cate')->where($where)->select();
+            $url = M('auth_cate')->where($where)->order('sort DESC')->select();
             foreach ($url as $key => &$value) {
                 $urls = $value['name'] . '/index';
                 $value['name'] = U($urls);
