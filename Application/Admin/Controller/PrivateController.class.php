@@ -444,22 +444,35 @@ class PrivateController extends PublicController
      **/
     public function index()
     {
-        //获取当前控制器模块路径
+        // //获取当前控制器模块路径
+        // $where = array(
+        //     'name'   => MODULE_NAME . '/' . CONTROLLER_NAME,
+        //     'level'  => 1,
+        //     'status' => 1
+        // );
+        // $pid = M('auth_cate')->where($where)->getField('id');
+        // //拿到该模块控制器下拥有权限的第一条规则
+        // $where = array(
+        //     'pid'    => $pid,
+        //     'status' => 1
+        // );
+        // if (UID != C('ADMINISTRATOR')) {
+        //     $where['id'] = array('in', $this->group_id);
+        // }
+        // $info = M('auth_cate')->where($where)->getField('name');
+        // $this->redirect($info);
+        $url = MODULE_NAME . '/' . CONTROLLER_NAME;
         $where = array(
-            'name'   => MODULE_NAME . '/' . CONTROLLER_NAME,
-            'level'  => 1,
-            'status' => 1
+            'a.name' => $url,
+            'a.level'=> 1,
+            'b.status' => 1
         );
-        $pid = M('auth_cate')->where($where)->getField('id');
-        //拿到该模块控制器下拥有权限的第一条规则
-        $where = array(
-            'pid'    => $pid,
-            'status' => 1
-        );
-        if (UID != C('ADMINISTRATOR')) {
-            $where['id'] = array('in', $this->group_id);
-        }
-        $info = M('auth_cate')->where($where)->getField('name');
+        $info = M()
+            -> table('__AUTH_CATE__ a')
+            -> join('LEFT JOIN __AUTH_CATE__ b ON a.id=b.pid')
+            -> where($where)
+            -> order('b.sort DESC')
+            -> getField('b.name');
         $this->redirect($info);
     }
 
