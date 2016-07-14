@@ -39,7 +39,6 @@ return array(
 	'DATA_CACHE_PREFIX'     =>  'think_auth_',     // 缓存前缀
 	//'DATA_CACHE_TYPE'       => '',
     'ADMIN_UID'                   => 'admin_uid',
-    'ADMINISTRATOR'         => 1,
     'PAGENUM'               => 20, //默认展示条数
     'ADMINISTRATOR'         => 1,
     'USERNAME'              => 'username',
