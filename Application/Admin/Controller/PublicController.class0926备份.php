@@ -14,19 +14,11 @@ use Think\Controller;
 
 class PublicController extends Controller
 {
-	/**
-	 * ship 没有条件时跳转地址
-	 * @author 普罗米修斯(996674366@qq.com)
-	 **/
-	protected function skip(){
-		session(C('ADMIN_UID'), null);
-		$this->redirect(C('DEFAULTS_MODULE') . '/Public/login');
-	}
     /**
      * success 执行成功返回json格式
      * @param $message 提示字符串
      * @param $url 跳转地址
-     * @author 普罗米修斯(996674366@qq.com)
+     * @author 刘中胜(996674366@qq.com)
      * @time 2015-15-05
      **/
     protected function success($message, $url = '')
@@ -43,7 +35,7 @@ class PublicController extends Controller
      * error 执行成功返回json格式
      * @param string $message 提示字符串
      * @param string $url 跳转地址
-     * @author 普罗米修斯
+     * @author 刘中胜
      * @time 2015-15-05
      **/
     protected function error($message = '')
@@ -58,18 +50,21 @@ class PublicController extends Controller
 
     /**
      * login 登录页面
-     * @author 普罗米修斯
+     * @author 刘中胜
      * @time 2015-04-29
      **/
     public function login()
     {
-        if(session(C('ADMIN_UID'))) $this->redirect(C('DEFAULTS_MODULE').'/Index/index');
-        $this->display();
+        if(session(C('ADMIN_UID'))){
+            $this->redirect(C('DEFAULTS_MODULE').'/Index/index');
+        }else{
+            $this->display();
+        }
     }
 
     /**
      * islogin 检测登录
-     * @author 普罗米修斯
+     * @author 刘中胜
      * @time 2015-04-29
      **/
     public function islogin()
@@ -87,13 +82,14 @@ class PublicController extends Controller
             );
             $url = M('auth_cate')->where($where)->order('sort DESC')->getField('module');
             $this->success('登录成功', U($url . '/Index/index'));
+        } else {
+            $this->error($model->getError());
         }
-        $this->error($model->getError());
     }
 
     /**
      * code 检测验证码
-     * @author 普罗米修斯
+     * @author 刘中胜
      * @time 2015-3-23
      **/
     public function code()
@@ -103,17 +99,18 @@ class PublicController extends Controller
 
     /**
      * logout 退出登录
-     * @author 普罗米修斯
+     * @author 刘中胜
      * @time 2015-06-05
      **/
     public function logout()
     {
-        self::skip():
+        session(C('ADMIN_UID'), null);
+        $this->redirect(C('DEFAULTS_MODULE') . '/Public/login');
     }
 
     /**
      * resetpwd 重置密码
-     * @author 普罗米修斯
+     * @author 刘中胜
      * @time 2015-06-05
      **/
     public function resetpwd()
@@ -129,7 +126,7 @@ class PublicController extends Controller
 
     /**
      * updatepwd 修改密码操作
-     * @author 普罗米修斯
+     * @author 刘中胜
      * @time 2015-06-05
      **/
     public function updatepwd()
@@ -185,12 +182,15 @@ class PublicController extends Controller
             if ($res === false) {
                 $model->rollback();
                 $this->error('修改失败');
+            } else {
+                $model->commit();
+                session(C('ADMIN_UID'), null);
+                $this->success('修改成功', U('Public/login'));
             }
-            $model->commit();
-            self::skip();
+        } else {
+            $model->rollback();
+            $this->error('修改失败');
         }
-        $model->rollback();
-        $this->error('修改失败');
     }
 
     /**
@@ -202,27 +202,23 @@ class PublicController extends Controller
     {
         $uid = session(C('ADMIN_UID'));
         if (empty($uid)) {
-            self::skip();
+            $this->redirect(C('DEFAULTS_MODULE') . '/Public/login');
         }
         //将uid定义为常量方便后期统一使用
         defined("UID") or define("UID", $uid);
         $str = S('group_rules' . $uid);
-		//定义用户-用户组model
-		$userGroupId = D('GroupAccess');
         if ($str == false) {
-			//调用getOneFile方法传参格式getOneFile('字段','条件（数组）','指定条数或者true如果只查询一条就为空')
             if ($uid == C('ADMINISTRATOR')) {
-				//如果为超级管理员查询所有数据
-                $group = $userGroupId ->getOneFile('group_id',array(), true);
+                $group = M('group_access')->getField('group_id', true);
             } else {
-				//如果为普通管理员查看当前用户的数据
                 $where = array(
                     'uid' => $uid
                 );
-				$group = $userGroupId ->getOneFile('group_id',$where, true);
+                $group = M('group_access')->where($where)->getField('group_id', true);
                 if (empty($group)) {
                     $this->error('登陆失败,权限不足');
-                    self::skip();
+                    session(C('ADMIN_UID'), null);
+                    $this->redirect(C('DEFAULTS_MODULE') . '/Public/login');
                 }
             }
             $where = array(
@@ -232,7 +228,8 @@ class PublicController extends Controller
             $list = M('group')->where($where)->getField('rules', true);
             if (empty($list[0])) {
                 $this->error('登陆失败,权限不足');
-                self::skip();
+                session(C('ADMIN_UID'), null);
+                $this->redirect(C('DEFAULTS_MODULE') . '/Public/login');
             }
             $str = implode(',', $list);
             $strArr = explode(',', $str);
@@ -244,7 +241,7 @@ class PublicController extends Controller
 
     /**
      * flashupload 上传方法
-     * @author 普罗米修斯
+     * @author 刘中胜
      * @time 2015-3-17
      **/
     public function flashupload()
@@ -310,7 +307,7 @@ class PublicController extends Controller
 
     /**
      * editUpload 编辑器上传图片
-     * @author 普罗米修斯
+     * @author 刘中胜
      * @time 2015-04-29
      **/
     public function editUpload()
@@ -326,6 +323,7 @@ class PublicController extends Controller
         $info = $upload->upload();
         $arr = array();
         if (!$info) {
+
             $arr['state'] = 'ERROR';
         } else {
             $infos = $info['upfile'];

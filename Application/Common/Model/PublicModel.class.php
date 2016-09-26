@@ -5,7 +5,19 @@ use Think\Model;
 
 class PublicModel extends Model
 {
+	/**
+	 * 获取某些指定用户的指定字段
+	 * @param string $file 字段名
+	 * @param array where 要查询的条件
+	 * @param  $type 默认true
+	 * @author 普罗米修斯 php63.cc
+	 **/
+	public function getOneFile($file, $where=array(), $type = false){
+		$result = $this->where($where)->getField($file, $type);
+		return $result;
+	}
     /**
+	
      * 查询一条记录
      * @param string $where 查询条件
      * @param string $field 要查询的字段,默认全部
