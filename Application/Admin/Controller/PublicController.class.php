@@ -108,7 +108,7 @@ class PublicController extends Controller
      **/
     public function logout()
     {
-        self::skip():
+        self::skip();
     }
 
     /**
