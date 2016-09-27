@@ -18,7 +18,7 @@ class PublicController extends Controller
 	 * ship 没有条件时跳转地址
 	 * @author 普罗米修斯(996674366@qq.com)
 	 **/
-	protected function skip(){
+	public function skip(){
 		session(C('ADMIN_UID'), null);
 		$this->redirect(C('DEFAULTS_MODULE') . '/Public/login');
 	}
@@ -85,7 +85,9 @@ class PublicController extends Controller
                 'level'  => 0,
                 'status' => 1
             );
-            $url = M('auth_cate')->where($where)->order('sort DESC')->getField('module');
+			//调用getOneField方法传参格式getOneField('字段','条件（数组）','指定条数或者true如果只查询一条就为空','排序方式')
+            
+            $url = D('AuthCate')->where($where)->order('sort DESC')->getField('module');
             $this->success('登录成功', U($url . '/Index/index'));
         }
         $this->error($model->getError());
@@ -102,32 +104,6 @@ class PublicController extends Controller
     }
 
     /**
-     * logout 退出登录
-     * @author 普罗米修斯
-     * @time 2015-06-05
-     **/
-    public function logout()
-    {
-        self::skip();
-    }
-
-    /**
-     * resetpwd 重置密码
-     * @author 普罗米修斯
-     * @time 2015-06-05
-     **/
-    public function resetpwd()
-    {
-        $where = array(
-            'id'     => session(C('ADMIN_UID')),
-            'status' => 1
-        );
-        $uid = M('admin')->where($where)->getField('id');
-        $this->assign('uid', $uid);
-        $this->display();
-    }
-
-    /**
      * updatepwd 修改密码操作
      * @author 普罗米修斯
      * @time 2015-06-05
@@ -137,10 +113,7 @@ class PublicController extends Controller
         $model = M();
         $model->startTrans();
         $char = randNum();
-        $id = I('post.id', 0, 'intval');
-        if (empty($id)) {
-            $this->error('参数错误');
-        }
+		$id = session(C('ADMIN_UID'));
         $password = trim(I('post.password'));
         if ($password == '') {
             $this->error('原始密码不能为空');
@@ -156,16 +129,21 @@ class PublicController extends Controller
         if ($new_pwd != $rep_new_pwd) {
             $this->error('两次密码不一致');
         }
-
+		//定义字符串表model
+		$charModel = D('Char');
         $where = array(
             'id' => $id,
         );
-        $chars = M('char')->where($where)->getField('chars');
+		//获取和用户匹配的字符串
+        $chars = $charModel->getOneField('chars',$where);
+		//定义用户model
+		$userModel = D('Admin');
+		//检测用户是否存在
         $where = array(
             'password' => md5Encrypt($password, $chars),
             'status'   => 1
         );
-        $user = M('admin')->where($where)->getField('id');
+        $user = $userModel->getOneField('id',$where);
         if (!$user) {
             $this->error('原始密码错误');
         }
@@ -181,13 +159,13 @@ class PublicController extends Controller
                 'chars' => $char,
                 'id'    => $id
             );
-            $res = M('char')->save($data);
+            $res = $charModel->save($data);
             if ($res === false) {
                 $model->rollback();
                 $this->error('修改失败');
             }
             $model->commit();
-            self::skip();
+			$this -> success('修改成功',U('skip'));
         }
         $model->rollback();
         $this->error('修改失败');
@@ -202,7 +180,7 @@ class PublicController extends Controller
     {
         $uid = session(C('ADMIN_UID'));
         if (empty($uid)) {
-            self::skip();
+            $this -> skip();
         }
         //将uid定义为常量方便后期统一使用
         defined("UID") or define("UID", $uid);
@@ -210,29 +188,26 @@ class PublicController extends Controller
 		//定义用户-用户组model
 		$userGroupId = D('GroupAccess');
         if ($str == false) {
-			//调用getOneFile方法传参格式getOneFile('字段','条件（数组）','指定条数或者true如果只查询一条就为空')
-            if ($uid == C('ADMINISTRATOR')) {
-				//如果为超级管理员查询所有数据
-                $group = $userGroupId ->getOneFile('group_id',array(), true);
-            } else {
-				//如果为普通管理员查看当前用户的数据
-                $where = array(
-                    'uid' => $uid
-                );
-				$group = $userGroupId ->getOneFile('group_id',$where, true);
-                if (empty($group)) {
-                    $this->error('登陆失败,权限不足');
-                    self::skip();
-                }
-            }
+			//调用getOneField方法传参格式getOneField('字段','条件（数组）','指定条数或者true如果只查询一条就为空')
             $where = array(
-                'id'     => array('in', $group),
                 'status' => 1
             );
+			if ($uid != C('ADMINISTRATOR')) {
+				//如果为普通管理员查看当前用户的数据
+                $map = array(
+                    'uid' => $uid
+                );
+				$group = $userGroupId ->getOneField('group_id',$map, true);
+                if (empty($group)) {
+                    $this->error('登陆失败,权限不足');
+                    $this -> skip();
+                }
+				$where['id'] = array('in', $group);
+            }
             $list = M('group')->where($where)->getField('rules', true);
             if (empty($list[0])) {
                 $this->error('登陆失败,权限不足');
-                self::skip();
+                $this -> skip();
             }
             $str = implode(',', $list);
             $strArr = explode(',', $str);

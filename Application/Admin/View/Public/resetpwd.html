@@ -7,9 +7,8 @@
         position:absolute;padding:8px 0;bottom:0;left:0;width:100%;
     }
 </style>
-<form class="update_pwd_form clearfix" action="{:U('Public/updatepwd')}" method="post" onsubmit="return Juuz.ajaxForm(this);">
+<form class="update_pwd_form clearfix" action="{:U('updatepwd')}" method="post" onsubmit="return Juuz.ajaxForm(this);">
     <div class="ui_col_10" style="padding:10px 20px 20px">
-        <input type="hidden" name="id" value="{$uid}">
         <div class="ui_col_10">
             <label class="ui_label">原密码 : </label>
             <input class="ui_text_input" value="" type="password" name="password" data-opt='{

@@ -12,8 +12,8 @@ class PublicModel extends Model
 	 * @param  $type 默认true
 	 * @author 普罗米修斯 php63.cc
 	 **/
-	public function getOneFile($file, $where=array(), $type = false){
-		$result = $this->where($where)->getField($file, $type);
+	public function getOneField($file, $where=array(), $type = false,$order=''){
+		$result = $this->where($where)->order($order)->getField($file, $type);
 		return $result;
 	}
     /**

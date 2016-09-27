@@ -113,9 +113,8 @@ class PrivateController extends PublicController
             }
             $Page = self::_page($count, $num);
             return $Page;
-        } else {
-            return $count;
         }
+        return $count;
     }
 
     /**
@@ -153,10 +152,9 @@ class PrivateController extends PublicController
         $res = $this->model->del($id);
         if (!$res) {
             $this->error($this->model->getError());
-        } else {
-            delTemp();
-            $this->success('删除成功', U($url));
         }
+        delTemp();
+        $this->success('删除成功', U($url));
     }
 
     /**
@@ -444,23 +442,6 @@ class PrivateController extends PublicController
      **/
     public function index()
     {
-        // //获取当前控制器模块路径
-        // $where = array(
-        //     'name'   => MODULE_NAME . '/' . CONTROLLER_NAME,
-        //     'level'  => 1,
-        //     'status' => 1
-        // );
-        // $pid = M('auth_cate')->where($where)->getField('id');
-        // //拿到该模块控制器下拥有权限的第一条规则
-        // $where = array(
-        //     'pid'    => $pid,
-        //     'status' => 1
-        // );
-        // if (UID != C('ADMINISTRATOR')) {
-        //     $where['id'] = array('in', $this->group_id);
-        // }
-        // $info = M('auth_cate')->where($where)->getField('name');
-        // $this->redirect($info);
         $url = MODULE_NAME . '/' . CONTROLLER_NAME;
         $where = array(
             'a.name' => $url,
@@ -559,8 +540,9 @@ class PrivateController extends PublicController
         $res = $this->model->delcate();
         if ($res) {
             $this->success('操作成功', U($url));
-        } else {
-            $this->error($this->model->getError());
         }
+        $this->error($this->model->getError());
     }
+	
+
 }
