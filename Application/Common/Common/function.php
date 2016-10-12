@@ -196,3 +196,26 @@ function homeUserPwd($str)
     $str = MD5(hash('sha256', $hash));
     return $str;
 }
+
+/**
+ * @author 普修米洛斯 www.php63.cc
+ * @param $file 缓存文件名
+ * @param int $time 缓存时间
+ */
+function check_cache($file, $time = 0){
+    if($time == 0){
+        $time = C('CACHE_TIME');
+    }
+    if (is_file($file) && (time() - filemtime($file)) < $time) {
+        require_once $file;
+        exit;
+    }
+}
+
+/**
+ * @author 普修米洛斯 www.php63.cc
+ * @param $file 生成静态页面
+ */
+function create_cache($file){
+    file_put_contents($file,ob_get_contents());
+}

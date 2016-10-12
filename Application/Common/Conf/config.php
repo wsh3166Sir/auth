@@ -55,4 +55,5 @@ return array(
     'MAIL_PASSWORD' =>'',//邮箱密码
     'MAIL_CHARSET' =>'utf-8',//设置邮件编码
     'MAIL_ISHTML' =>TRUE, // 是否HTML格式邮件
+	'CACHE_TIME'          => '600', //缓存时间
 );

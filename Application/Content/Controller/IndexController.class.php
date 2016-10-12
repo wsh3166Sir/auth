@@ -1,18 +1,8 @@
 <?php
 namespace Content\Controller;
-use Admin\Controller\PrivateController;
-class IndexController extends PrivateController {
+class IndexController extends PublicController {
     public function index(){
-        $module = MODULE_NAME;
-        $modules = I('get.module','');
-        if(!empty($modules)){
-            delTemp();
-        }
-        $this -> redirect(MODULE_NAME.'/'.CONTROLLER_NAME.'/info');
+		//调用首页跳转处理方法
+        self::urlRedirect();
 	}
-
-    public function info()
-    {
-       $this -> display();
-    }
 }

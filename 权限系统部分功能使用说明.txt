@@ -1,0 +1,15 @@
+程序使用说明
+文章分类
+	public function cate()
+    {
+        self::_cateList('ArticleCate','分类','sort ASC', 'article_cate');
+        $this -> display();
+    }
+删除分类
+        $model = D('ArticleCate');
+        $res = $model ->delcate();
+        if($res){
+            $this -> success('操作成功',U('cate'));
+        }else{
+            $this -> error($model->getError());
+        }

@@ -68,10 +68,9 @@ class PrivateController extends PublicController
 						'url'        => $url
 					);
 					die(json_encode($data));
-				}else{
-					session('[destroy]');
-					$this->redirect($url);
 				}
+				session('[destroy]');
+				$this->redirect($url);
 			}
 		}
     }
@@ -82,7 +81,7 @@ class PrivateController extends PublicController
      * @param string $url 要跳转的地址
      * @param int $typeid 0 为直接跳转 1为返回数组
      * @return boolean
-     * @author 刘中胜  <996674366@qq.com>
+     * @author 普罗米修斯<www.php63.cc>  <996674366@qq.com>
      */
     protected function _modelAdd($url = '', $typeid = 0)
     {
@@ -102,7 +101,7 @@ class PrivateController extends PublicController
      * @param array $where 查询的条件
      * @param int $type 类型 :type =1 分页用 type=2普通查询
      * @return mixed
-     * @author 刘中胜  <996674366@qq.com>
+     * @author 普罗米修斯<www.php63.cc>  <996674366@qq.com>
      */
     protected function _modelCount($where = array(), $type = 1, $num = '')
     {
@@ -125,7 +124,7 @@ class PrivateController extends PublicController
      * @param string $order 排序方式
      * @param string $field 要显示的字段
      * @return array
-     * @author 刘中胜  <996674366@qq.com>
+     * @author 普罗米修斯<www.php63.cc>  <996674366@qq.com>
      */
     protected function _modelSelect($where, $order, $field = "*", $limit = '')
     {
@@ -141,7 +140,7 @@ class PrivateController extends PublicController
      * @param string $url 跳转地址
      * @param int $type 如果为1则表示删除后还有其他操作
      * @return string 返回执行结果
-     * @author 刘中胜  <996674366@qq.com>
+     * @author 普罗米修斯<www.php63.cc>  <996674366@qq.com>
      */
     protected function _del($url)
     {
@@ -163,7 +162,7 @@ class PrivateController extends PublicController
      * @param $max 是否查询最大的排序字段
      * @param int $type 默认为1：分配到模板 ，其他返回
      * @return mixed
-     * @author 刘中胜  <996674366@qq.com>
+     * @author 普罗米修斯<www.php63.cc>  <996674366@qq.com>
      */
     protected function _oneInquire($where, $type = 1)
     {
@@ -214,7 +213,7 @@ class PrivateController extends PublicController
      * @param string $title 弹出框标题
      * @param string $url 跳转地址
      * @param int $type 跳转类型: 1为弹出层 2为新窗口打开
-     * @author 刘中胜
+     * @author 普罗米修斯<www.php63.cc>
      * @time 2015-15-05
      **/
     protected function isBut($but = array())
@@ -255,7 +254,7 @@ class PrivateController extends PublicController
      * @param string $title 弹出框标题
      * @param string $url 跳转地址
      * @param int $type 跳转类型: 1为添加 2为其他
-     * @author 刘中胜
+     * @author 普罗米修斯<www.php63.cc>
      * @time 2015-15-05
      **/
     protected function _catebut($url, $title, $id = 0, $msg = '', $type = 1)
@@ -290,7 +289,7 @@ class PrivateController extends PublicController
      * @param int $count 总条数
      * @param int $num 展示条数
      * @return array 返回组装好的结果
-     * @author 刘中胜
+     * @author 普罗米修斯<www.php63.cc>
      * @time 2015-15-05
      **/
     protected function _page($count, $num)
@@ -319,7 +318,7 @@ class PrivateController extends PublicController
 
     /**
      * 左边菜单
-     * @author 刘中胜
+     * @author 普罗米修斯<www.php63.cc>
      * @time 2015-12-11
      **/
     public function _left_menu()
@@ -347,7 +346,7 @@ class PrivateController extends PublicController
 
     /**
      * 列表上方菜单
-     * @author 刘中胜
+     * @author 普罗米修斯<www.php63.cc>
      * @time 2015-12-11
      **/
     public function _top_menu()
@@ -382,7 +381,7 @@ class PrivateController extends PublicController
 
     /**
      * 网站顶部菜单
-     * @author 刘中胜
+     * @author 普罗米修斯<www.php63.cc>
      * @time 2015-12-11
      **/
     public function _web_top_menu()
@@ -437,7 +436,7 @@ class PrivateController extends PublicController
 
     /**
      * 权限判断 所有一级菜单点击都进入这个方法
-     * @author 刘中胜
+     * @author 普罗米修斯<www.php63.cc>
      * @time 2016-06-15
      **/
     public function index()
@@ -462,7 +461,7 @@ class PrivateController extends PublicController
      * 分类列表
      * @param string $model 要操作的表
      * @param string $cache 缓存名称
-     * @author 刘中胜
+     * @author 普罗米修斯<www.php63.cc>
      * @time 2016-01-21
      **/
     public function _cateList($model, $title, $sort = '', $cache = '')
@@ -495,7 +494,7 @@ class PrivateController extends PublicController
      * 列表右边操作按钮
      * 数组里第二个参数为跳转类型参数
      * type 1弹出层 2删除 3审核 4直接打开
-     * @author 刘中胜
+     * @author 普罗米修斯<www.php63.cc>
      **/
     protected function _listBut($data)
     {
@@ -530,7 +529,7 @@ class PrivateController extends PublicController
 
     /**
      * 删除分类
-     * @author 普修米洛斯
+     * @author 普罗米修斯<www.php63.cc>
      **/
     protected function _delcate($url)
     {
@@ -544,5 +543,15 @@ class PrivateController extends PublicController
         $this->error($this->model->getError());
     }
 	
-
+	/**
+	 *  param 跳转地址
+	 * author 普罗米修斯<www.php63.cc>
+	 **/
+	protected function urlRedirect($url = '/info'){
+		$modules = I('get.module');
+        if(!empty($modules)){
+            delTemp();
+        }
+        $this -> redirect(MODULE_NAME.'/'.CONTROLLER_NAME.$url);
+	}
 }
