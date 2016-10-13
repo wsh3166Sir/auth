@@ -31,14 +31,19 @@ function delTemp($dir = TEMP_PATH){
        if ($file != "." && $file != "..") {
            $fullpath = $dir . "/" . $file;
            if (!is_dir($fullpath)) {
-               unlink($fullpath);
+                unlink($fullpath);
            } else {
-               deldir($fullpath);
+                delTemp($fullpath);
            }
        }
     }
+    closedir($dh);
+    if (rmdir($dir))
+    {
+        return true;
+    }
+    return false;
 }
-
 /**
  * 将key相同的数组合并为新的数组
  * @param array $arr 接收要组装的二维数组
