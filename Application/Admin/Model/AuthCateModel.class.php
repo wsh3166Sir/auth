@@ -82,7 +82,7 @@ class AuthCateModel extends \Common\Model\PublicModel
             }
             $dataArr['title'] = $data['title'];
             $dataArr['sort'] = $data['sort'];
-            $dataArr['is_menu'] = $data['is_menu'];
+            $dataArr['is_menu'] = $data['is_menu'] ? $data['is_menu'] : 1;
             $res = $this->where($where)->save($dataArr);
             if(!$res){
                 $this->error = '没有数据被更新';
