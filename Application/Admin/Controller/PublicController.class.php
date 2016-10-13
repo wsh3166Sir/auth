@@ -102,7 +102,16 @@ class PublicController extends Controller
     {
         code();
     }
-
+    /**
+     * logout 退出登录
+     * @author 刘中胜
+     * @time 2015-06-05
+     **/
+    public function logout()
+    {
+        session(C('uid'), null);
+        $this->redirect(C('DEFAULTS_MODULE') . '/Public/login');
+    }
     /**
      * updatepwd 修改密码操作
      * @author 普罗米修斯
