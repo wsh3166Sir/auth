@@ -333,10 +333,23 @@ class PrivateController extends PublicController
             if (UID != C('ADMINISTRATOR')) {
                 $where['id'] = array('in', $this->group_id);
             }
-            $url = M('auth_cate')->where($where)->order('sort DESC')->select();
+            $model = M('auth_cate');
+            $url = $model->where($where)->order('sort DESC')->select();
             foreach ($url as $key => &$value) {
-                $urls = $value['name'] . '/index';
-                $value['name'] = U($urls);
+                $where = array(
+                    'pid' =>$value['id'],
+                    'status' => 1,
+                    'is_menu' => 1
+                );
+                if($model->where($where)->count() <= 0)
+                {
+                    array_splice($url, $key, 1);
+                }
+                else
+                {
+                    $urls = $value['name'] . '/index';
+                    $value['name'] = U($urls);
+                }
             }
             unset($value);
             S('left_menu' . UID, $url);

@@ -44,6 +44,7 @@ function delTemp($dir = TEMP_PATH){
     }
     return false;
 }
+
 /**
  * 将key相同的数组合并为新的数组
  * @param array $arr 接收要组装的二维数组
