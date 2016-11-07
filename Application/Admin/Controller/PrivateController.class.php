@@ -42,19 +42,12 @@ class PrivateController extends PublicController
             return true;
         }
         //读取缓存名为check_iskey+uid的缓存
-        $iskey = S('check_iskey' . UID);
-        $key = MODULE_NAME . '/' . CONTROLLER_NAME . '/' . ACTION_NAME;
-        //如果缓存等于false查询当前路径的规则id
-        if ($iskey == false) {
-            $where = array(
-                'name'   => $key,
-                'status' => 1
-            );
-            $iskey = M('auth_cate')->where($where)->getField('id');
-            //将结果写入缓存
-            S('check_iskey' . UID, $iskey);
-        }
-
+        $key = MODULE_NAME.'/'. CONTROLLER_NAME . '/' . ACTION_NAME;
+        $where = array(
+            'name'   => $key,
+            'status' => 1
+        );
+        $iskey = M('auth_cate')->where($where)->getField('id');
 		//检测该规则id是否存在于分组拥有的权限里
 		if(!empty($iskey) && !in_array($iskey,$this -> group_id)){
 			$this->auth = new Auth();
