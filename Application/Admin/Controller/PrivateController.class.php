@@ -330,18 +330,18 @@ class PrivateController extends PublicController
             $url = $model->where($where)->order('sort DESC')->select();
             foreach ($url as $key => &$value) {
                 $where = array(
-                    'pid' =>$value['id'],
+                    'pid' => $value['id'],
                     'status' => 1,
-                    'is_menu' => 1
                 );
-                if($model->where($where)->count() <= 0)
-                {
-                    array_splice($url, $key, 1);
+                $info = $model->where($where)->field('id,is_menu')->find();
+                if($info['is_menu'] != 0 && !is_null($info)){
+                    array_splice($url, $key,1);
                 }
-                else
-                {
+                if(is_null($info)){
+                    unset($url[$key]);
+                }else{
                     $urls = $value['name'] . '/index';
-                    $value['name'] = U($urls);
+                    $value['name'] = U($urls); 
                 }
             }
             unset($value);
