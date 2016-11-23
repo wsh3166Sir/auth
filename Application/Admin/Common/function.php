@@ -1,46 +1,41 @@
 <?php
+    /**
+     * @author 普修米洛斯 www.php63.cc
+     * @param int $width 宽度
+     * @param int $height 高度
+     * @param int $font_size 字体大小
+     * @param int $code_len 验证码长度
+     * @param int $line_num 线条长度
+     * @param string $font 字体名称
+     * @param int $interference 雪花数量
+     */
+    function code($width = 100, $height = 32, $font_size = 13, $code_len = 4, $line_num = 5, $font = './Public/ttf/5.ttf', $interference = 40,$verifyName = 'code'){
+        $image = imagecreatetruecolor($width, $height);
+        $image_color = imagecolorallocate($image,mt_rand(157,255), mt_rand(157,255), mt_rand(157,255));
+        imagefilledrectangle($image,0,$height,$width,0,$image_color);
+        $x = $width/$code_len;
+        $codeStrs = '';
+        for($i = 0; $i<$code_len;$i++){
+            $str = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            $font_color = imagecolorallocate($image,mt_rand(0,156),mt_rand(0,156),mt_rand(0,156));
+            $codeStrs .= $codeStr = utf8_encode($str[mt_rand(0,strlen($str)-1)]);
 
-
-/**
- * code 验证码函数
- * @param int $length 验证码长度默认为4
- * @param int $width 验证码图片宽度默认为100
- * @param int $height 验证码图片高度 默认为30
- * @param string $code 验证码session里面的key 默认code
- * @author 刘中胜
- * @time 2014-12-5
- **/
-function code($size='24',$length='4',$width='100',$height='40',$verifyName = 'code'){
-    $w = $width-1;
-    $h = $height-1;
-    $image = imagecreate($width,$height);
-    $imagecolor = imagecolorallocate($image,255,255,255);
-    $bordercolor = imagecolorallocate($image,0,0,0);
-    $rectangle  = imagerectangle($image,0,0,$w,$h,$bordercolor);
-    for($i=0;$i<$length;$i++){
-        $fontsize = $size;
-        $fontcolor = imagecolorallocate($image,rand(1,120),rand(1,120),rand(1,120));
-        $data = 'zxcvbnmasdfghjkqwertyup23456789';
-        $str .= $fontcontent = substr($data,rand(0,strlen($data)-1),1);
-        $x = ($i*$width/$length) + rand(3,10);
-        $y = rand(2,12);
-        imagestring($image,$fontsize,$x,$y,$fontcontent,$fontcolor);
+            imagettftext($image,$font_size,mt_rand(-30,30),$x*$i+mt_rand(1,3),$height / 1.4,$font_color,$font,$codeStr);
+        }
+        session($verifyName,md5(strtolower($codeStrs)));
+        //生成线条
+        for($i = 0;$i<$line_num;$i++) {
+            $line_color = imagecolorallocate($image, mt_rand(0, 156), mt_rand(0, 156), mt_rand(0, 156));
+            imageline($image, mt_rand(0,$width),mt_rand(0,$height),mt_rand(0,$width),mt_rand(0,$height), $line_color);
+        }
+        for($i=0;$i<$interference;$i++){
+            $color = imagecolorallocate($image, mt_rand(200, 255), mt_rand(200, 255), mt_rand(200, 255));
+            imagestring($image,mt_rand(1,5),mt_rand(0,$width),mt_rand(0,$height),'*',$color);
+        }
+        header("Content-type: image/png");
+        imagepng($image);
+        imagedestroy($image);
     }
-
-    session($verifyName,md5($str));
-    for($i=0;$i<200;$i++){
-        $xelcolor = imagecolorallocate($image,rand(80,220),rand(80,220),rand(80,220));
-        imagesetpixel($image,rand(1,$w),rand(1,$h),$xelcolor);
-    }
-    for($i=0;$i<4;$i++){
-        $imageline = imagecolorallocate($image,rand(80,220),rand(80,220),rand(80,220));
-        imageline($image,rand(1,$w),rand(1,$h),rand(1,$w),rand(1,$h),$imageline);
-    }
-    ob_clean();
-    header('content-type:image/png');
-    imagepng($image);
-    imagedestroy($image);
-}
 
 /**
  * checkcode 检测验证码方法

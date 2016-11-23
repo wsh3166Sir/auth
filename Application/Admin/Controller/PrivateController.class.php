@@ -332,13 +332,11 @@ class PrivateController extends PublicController
                 $where = array(
                     'pid' => $value['id'],
                     'status' => 1,
+                    'is_menu' => array('neq',0)
                 );
-                $info = $model->where($where)->field('id,is_menu')->find();
-                if($info['is_menu'] != 0 && !is_null($info)){
+                $info = $model->where($where)->count();
+                if($info){
                     array_splice($url, $key,1);
-                }
-                if(is_null($info)){
-                    unset($url[$key]);
                 }else{
                     $urls = $value['name'] . '/index';
                     $value['name'] = U($urls); 
