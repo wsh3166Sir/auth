@@ -177,7 +177,7 @@ class AdminController extends PrivateController
         if($id != 0){
             $where = array(
                 'id'    => $id,
-                'statu' => 1
+                'status' => 1
             );
             $info = self::_oneInquire($where, 2);
         }else{
