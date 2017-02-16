@@ -448,17 +448,18 @@ class PrivateController extends PublicController
         $url = MODULE_NAME . '/' . CONTROLLER_NAME;
         $where = array(
             'a.name' => $url,
-            'b.id'   => array('in',$this->group_id),
             'a.level'=> 1,
             'b.status' => 1
         );
+        if(UID != C('ADMINISTRATOR')){
+            $where['b.id']   = array('in',$this->group_id);
+        }
         $info = M()
             -> table('__AUTH_CATE__ a')
             -> join('LEFT JOIN __AUTH_CATE__ b ON a.id=b.pid')
             -> where($where)
             -> order('b.sort DESC')
             -> getField('b.name');
-        $this->redirect($info);
         $this->redirect($info);
     }
 
