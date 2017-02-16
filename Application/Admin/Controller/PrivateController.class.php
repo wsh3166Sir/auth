@@ -448,6 +448,7 @@ class PrivateController extends PublicController
         $url = MODULE_NAME . '/' . CONTROLLER_NAME;
         $where = array(
             'a.name' => $url,
+            'b.id'   => array('in',$this->group_id),
             'a.level'=> 1,
             'b.status' => 1
         );
@@ -457,6 +458,7 @@ class PrivateController extends PublicController
             -> where($where)
             -> order('b.sort DESC')
             -> getField('b.name');
+        $this->redirect($info);
         $this->redirect($info);
     }
 
