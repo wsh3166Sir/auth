@@ -1,0 +1,3 @@
+<?php
+//000000000000a:3:{i:0;a:4:{s:2:"id";s:1:"1";s:5:"title";s:12:"后台管理";s:6:"module";s:5:"Admin";s:3:"url";s:53:"/auth/index.php/Admin/Index/index/module/Content.html";}i:1;a:4:{s:2:"id";s:2:"11";s:5:"title";s:12:"测试平台";s:6:"module";s:4:"Test";s:3:"url";s:52:"/auth/index.php/Test/Index/index/module/Content.html";}i:2;a:4:{s:2:"id";s:2:"10";s:5:"title";s:12:"用户平台";s:6:"module";s:7:"Content";s:3:"url";s:55:"/auth/index.php/Content/Index/index/module/Content.html";}}
+?>

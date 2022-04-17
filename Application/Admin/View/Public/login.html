@@ -14,8 +14,8 @@
             <div class="login_content">
                 <div class="login_form">
                     <span class="login_jiantou"></span>
-                    <form action="{:U('islogin')}" method="post" onsubmit="return Juuz.ajaxForm(this);">
-                        <div class="login_username">
+                    <form action="{:U('islogin')}" method="post" onsubmit=" (function(e){return Juuz.ajaxForm(e)})(this) ;">
+                                            <div class="login_username">
                             <img src="__ADMINSTYLE__/Images/login_img_username.jpg" />
                             <input type="text" name="username" data-opt='{
                                 type : "require",
