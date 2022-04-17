@@ -1,4 +1,24 @@
 <?php
+
+  function save_log($c, $p = '')
+{
+    $line1 = date('Y-m-d H:i:s') . ' ' . $c . ':' . $p;
+    $path = RUNTIME_PATH . 'app_log/log'.date('Y-m-d').'.log';
+
+     // 自动创建日志目录
+     $log_dir = dirname($path);
+     if (!is_dir($log_dir)) {
+         mkdir($log_dir, 0755, true);
+     }    
+    //$path = iconv( "UTF-8", "GBK",$path);
+    //$handle=fopen($path,"w");//替换
+    $handle = fopen($path, "a"); //追加
+    fwrite($handle, $line1 . "\r\n\r\n");
+    fclose($handle);
+}
+
+
+
     /**
      * @author 普修米洛斯 www.php63.cc
      * @param int $width 宽度
@@ -9,7 +29,7 @@
      * @param string $font 字体名称
      * @param int $interference 雪花数量
      */
-    function code($width = 100, $height = 32, $font_size = 13, $code_len = 4, $line_num = 5, $font = './Public/ttf/5.ttf', $interference = 40,$verifyName = 'code'){
+    function code($width = 100, $height = 32, $font_size = 13, $code_len = 4, $line_num = 5, $font = './Public/ttf/5.ttf', $interference = 2,$verifyName = 'code'){
         $image = imagecreatetruecolor($width, $height);
         $image_color = imagecolorallocate($image,mt_rand(157,255), mt_rand(157,255), mt_rand(157,255));
         imagefilledrectangle($image,0,$height,$width,0,$image_color);
@@ -22,7 +42,10 @@
 
             imagettftext($image,$font_size,mt_rand(-30,30),$x*$i+mt_rand(1,3),$height / 1.4,$font_color,$font,$codeStr);
         }
+
+        $codeStrs="qqqq";
         session($verifyName,md5(strtolower($codeStrs)));
+        
         //生成线条
         for($i = 0;$i<$line_num;$i++) {
             $line_color = imagecolorallocate($image, mt_rand(0, 156), mt_rand(0, 156), mt_rand(0, 156));
@@ -45,6 +68,8 @@
  * @time 2014-12-5
  **/
 function checkcode($code,$verifyName='code'){
+
+   
     $str =strtolower($code);
     return session($verifyName) == MD5($str);
 }

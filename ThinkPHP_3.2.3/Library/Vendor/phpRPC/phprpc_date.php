@@ -182,7 +182,7 @@ class PHPRPC_Date {
         while ($days >= 365) {
             if ($year >= 9999) return false;
             if ($month <= 2) {
-                if ((($year % 4) == 0) ? (($year % 100) == 0) ? (($year % 400) == 0) : true : false) {
+                if ((($year % 4) == 0) && (($year % 100) == 0) && (($year % 400) == 0)) {
                     $days -= 366;
                 }
                 else {
@@ -192,7 +192,7 @@ class PHPRPC_Date {
             }
             else {
                 $year++;
-                if ((($year % 4) == 0) ? (($year % 100) == 0) ? (($year % 400) == 0) : true : false) {
+                if ((($year % 4) == 0) && (($year % 100) == 0) && (($year % 400) == 0)) {
                     $days -= 366;
                 }
                 else {
@@ -204,7 +204,7 @@ class PHPRPC_Date {
             if ($year <= 1) return false;
             if ($month <= 2) {
                 $year--;
-                if ((($year % 4) == 0) ? (($year % 100) == 0) ? (($year % 400) == 0) : true : false) {
+                if ((($year % 4) == 0) && (($year % 100) == 0) && (($year % 400) == 0)) {
                     $days += 366;
                 }
                 else {
@@ -212,7 +212,7 @@ class PHPRPC_Date {
                 }
             }
             else {
-                if ((($year % 4) == 0) ? (($year % 100) == 0) ? (($year % 400) == 0) : true : false) {
+                if ((($year % 4) == 0) && (($year % 100) == 0) && (($year % 400) == 0)) {
                     $days += 366;
                 }
                 else {
@@ -496,7 +496,7 @@ class PHPRPC_Date {
     }
 
     function isLeapYear($year) {
-        return (($year % 4) == 0) ? (($year % 100) == 0) ? (($year % 400) == 0) : true : false;
+        return (($year % 4) == 0) && (($year % 100) == 0) && (($year % 400) == 0);
     }
 
     function daysInMonth($year, $month) {

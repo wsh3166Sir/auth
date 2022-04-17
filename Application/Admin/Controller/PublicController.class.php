@@ -29,8 +29,11 @@ class PublicController extends Controller
      * @author 普罗米修斯(996674366@qq.com)
      * @time 2015-15-05
      **/
-    protected function success($message, $url = '')
+    protected function success1($message, $url = '')
     {
+
+
+        E("11") ;
         $array = array(
             'statusCode' => 200,
             'message'    => $message,
@@ -88,7 +91,7 @@ class PublicController extends Controller
 			//调用getOneField方法传参格式getOneField('字段','条件（数组）','指定条数或者true如果只查询一条就为空','排序方式')
             
             $url = D('AuthCate')->where($where)->order('sort DESC')->getField('module');
-            $this->success('登录成功', U($url . '/Index/index'));
+            $this->success('登录成功了', U($url . '/Index/index'),0);
         }
         $this->error($model->getError());
     }
@@ -198,6 +201,7 @@ class PublicController extends Controller
 		$userGroupId = D('GroupAccess');
         if ($str == false) {
 			//调用getOneField方法传参格式getOneField('字段','条件（数组）','指定条数或者true如果只查询一条就为空')
+            //	public function getOneField($file, $where=array(), $type = false,$order=''){
             $where = array(
                 'status' => 1
             );
@@ -206,7 +210,8 @@ class PublicController extends Controller
                 $map = array(
                     'uid' => $uid
                 );
-				$group = $userGroupId ->getOneField('group_id',$map, true);
+				 
+				$group = $userGroupId ->where($map)->getField('group_id',true);;
                 if (empty($group)) {
                     $this->error('登陆失败,权限不足');
                     $this -> skip();

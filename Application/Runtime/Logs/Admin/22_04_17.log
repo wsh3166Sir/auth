@@ -1,0 +1,622 @@
+[ 2022-04-17T12:13:19+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000479s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000773s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+ERR: SQLSTATE[HY000] [1049] Unknown database 'auth'
+
+[ 2022-04-17T12:24:33+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000389s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000640s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000036s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000066s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.005601s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.005633s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000281s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000293s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000427s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000448s ]
+
+[ 2022-04-17T12:24:33+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+ERR: SQLSTATE[HY000] [1049] Unknown database 'auth'
+
+[ 2022-04-17T12:26:03+08:00 ] 127.0.0.1 /auth/index.php/Admin/Admin/useredit/id/15.html?_=1650169563566
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000270s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000439s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+NOTIC: [8192] Array and string offset access syntax with curly braces is deprecated D:\auth_github\auth\ThinkPHP_3.2.3\Library\Think\Cache\Driver\File.class.php 第 59 行.
+SQL: SHOW COLUMNS FROM `a_group_access` [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `a_auth_cate` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `a_auth_cate` WHERE `status` = 1 AND `level` = 1 AND `module` = 'Admin' AND `id` IN ('0','1','3','4','5','6','10','19','83','184','76','78','79','80','155','169','207','81','211','261','302','309','318','321','327','328','85','106','235','285','87','88','89','93','94','111','112','113','114','115','116','117','179','308','96','107','256','264','270','273','275','282','286','289','98','136','137','139','141','156','183','202','209','210','250','251','252','257','265','268','271','272','274','276','278','283','287','305','311','312','320','323','324','104','105','186','258','129','130','149','150','181','198','242','259','262','277','279','281','284','290','291','303','304','313','319','322','330','131','132','138','143','146','172','189','191','199','208','224','229','248','253','254','255','292','325','326','161','162','174','197','200','201','260','329','176','177','178','185','301','306','307','310','293','297','315','316','11','298','299','300','314','317') ORDER BY sort DESC  [ RunTime:0.0005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `a_auth_cate` WHERE `pid` = 3 AND `status` = 1 AND `is_menu` <> 0 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT `module`,`controller`,`method`,`title`,`name` FROM `a_auth_cate` WHERE `status` = 1 AND `level` = 2 AND `is_menu` = 0 AND `module` = 'Admin' AND `controller` = 'Admin' AND `id` IN ('0','1','3','4','5','6','10','19','83','184','76','78','79','80','155','169','207','81','211','261','302','309','318','321','327','328','85','106','235','285','87','88','89','93','94','111','112','113','114','115','116','117','179','308','96','107','256','264','270','273','275','282','286','289','98','136','137','139','141','156','183','202','209','210','250','251','252','257','265','268','271','272','274','276','278','283','287','305','311','312','320','323','324','104','105','186','258','129','130','149','150','181','198','242','259','262','277','279','281','284','290','291','303','304','313','319','322','330','131','132','138','143','146','172','189','191','199','208','224','229','248','253','254','255','292','325','326','161','162','174','197','200','201','260','329','176','177','178','185','301','306','307','310','293','297','315','316','11','298','299','300','314','317') ORDER BY sort DESC  [ RunTime:0.0005s ]
+SQL: SELECT `id` FROM `a_auth_cate` WHERE `name` = 'Admin/Admin/useredit' AND `status` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `a_admin` WHERE `id` = 15 AND `status` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `a_group_access` [ RunTime:0.0003s ]
+SQL: SELECT `group_id` FROM `a_group_access` WHERE `uid` = 15  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `a_group` [ RunTime:0.0014s ]
+SQL: SELECT `id`,`title` FROM `a_group` WHERE `status` = 1 ORDER BY sort DESC  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000044s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000093s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006702s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006720s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000188s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000197s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000321s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000332s ]
+
+[ 2022-04-17T12:26:07+08:00 ] 127.0.0.1 /auth/index.php/Admin/Admin/groupauth/id/4.html?id=4&_=1650169567917
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000268s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000441s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+NOTIC: [8192] Array and string offset access syntax with curly braces is deprecated D:\auth_github\auth\ThinkPHP_3.2.3\Library\Think\Cache\Driver\File.class.php 第 59 行.
+SQL: SHOW COLUMNS FROM `a_group_access` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `a_auth_cate` [ RunTime:0.0003s ]
+SQL: SELECT * FROM `a_auth_cate` WHERE `status` = 1 AND `level` = 1 AND `module` = 'Admin' AND `id` IN ('0','1','3','4','5','6','10','19','83','184','76','78','79','80','155','169','207','81','211','261','302','309','318','321','327','328','85','106','235','285','87','88','89','93','94','111','112','113','114','115','116','117','179','308','96','107','256','264','270','273','275','282','286','289','98','136','137','139','141','156','183','202','209','210','250','251','252','257','265','268','271','272','274','276','278','283','287','305','311','312','320','323','324','104','105','186','258','129','130','149','150','181','198','242','259','262','277','279','281','284','290','291','303','304','313','319','322','330','131','132','138','143','146','172','189','191','199','208','224','229','248','253','254','255','292','325','326','161','162','174','197','200','201','260','329','176','177','178','185','301','306','307','310','293','297','315','316','11','298','299','300','314','317') ORDER BY sort DESC  [ RunTime:0.0005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `a_auth_cate` WHERE `pid` = 3 AND `status` = 1 AND `is_menu` <> 0 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT `module`,`controller`,`method`,`title`,`name` FROM `a_auth_cate` WHERE `status` = 1 AND `level` = 2 AND `is_menu` = 0 AND `module` = 'Admin' AND `controller` = 'Admin' AND `id` IN ('0','1','3','4','5','6','10','19','83','184','76','78','79','80','155','169','207','81','211','261','302','309','318','321','327','328','85','106','235','285','87','88','89','93','94','111','112','113','114','115','116','117','179','308','96','107','256','264','270','273','275','282','286','289','98','136','137','139','141','156','183','202','209','210','250','251','252','257','265','268','271','272','274','276','278','283','287','305','311','312','320','323','324','104','105','186','258','129','130','149','150','181','198','242','259','262','277','279','281','284','290','291','303','304','313','319','322','330','131','132','138','143','146','172','189','191','199','208','224','229','248','253','254','255','292','325','326','161','162','174','197','200','201','260','329','176','177','178','185','301','306','307','310','293','297','315','316','11','298','299','300','314','317') ORDER BY sort DESC  [ RunTime:0.0008s ]
+SQL: SELECT `id` FROM `a_auth_cate` WHERE `name` = 'Admin/Admin/groupauth' AND `status` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `a_group` [ RunTime:0.0004s ]
+SQL: SELECT `rules` FROM `a_group` WHERE `id` = 4 AND `status` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,title name FROM `a_auth_cate` WHERE `status` = 1  [ RunTime:0.0003s ]
+
+[ 2022-04-17T12:26:12+08:00 ] 127.0.0.1 /auth/index.php/Admin/Admin/savegroupauth.html?groupId=4&idStr=0%2C1%2C3%2C4%2C5%2C6%2C14%2C16%2C24%2C25%2C10%2C19%2C83%2C184%2C76%2C78%2C79%2C80%2C155%2C169%2C207%2C81%2C211%2C261%2C302%2C309%2C318%2C321%2C327%2C328%2C85%2C106%2C235%2C285%2C87%2C88%2C89%2C93%2C94%2C111%2C112%2C113%2C114%2C115%2C116%2C117%2C179%2C308%2C96%2C107%2C256%2C264%2C270%2C273%2C275%2C282%2C286%2C289%2C98%2C136%2C137%2C139%2C141%2C156%2C183%2C202%2C209%2C210%2C250%2C251%2C252%2C257%2C265%2C268%2C271%2C272%2C274%2C276%2C278%2C283%2C287%2C305%2C311%2C312%2C320%2C323%2C324%2C104%2C105%2C186%2C258%2C129%2C130%2C149%2C150%2C181%2C198%2C242%2C259%2C262%2C277%2C279%2C281%2C284%2C290%2C291%2C303%2C304%2C313%2C319%2C322%2C330%2C131%2C132%2C138%2C143%2C146%2C172%2C189%2C191%2C199%2C208%2C224%2C229%2C248%2C253%2C254%2C255%2C292%2C325%2C326%2C161%2C162%2C174%2C197%2C200%2C201%2C260%2C329%2C176%2C177%2C178%2C185%2C301%2C306%2C307%2C310%2C293%2C294%2C295%2C296%2C297%2C315%2C316%2C11%2C298%2C299%2C300%2C314%2C317&_=1650169572081
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000296s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000575s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+NOTIC: [8192] Array and string offset access syntax with curly braces is deprecated D:\auth_github\auth\ThinkPHP_3.2.3\Library\Think\Cache\Driver\File.class.php 第 59 行.
+SQL: SHOW COLUMNS FROM `a_group_access` [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `a_auth_cate` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `a_auth_cate` WHERE `status` = 1 AND `level` = 1 AND `module` = 'Admin' AND `id` IN ('0','1','3','4','5','6','10','19','83','184','76','78','79','80','155','169','207','81','211','261','302','309','318','321','327','328','85','106','235','285','87','88','89','93','94','111','112','113','114','115','116','117','179','308','96','107','256','264','270','273','275','282','286','289','98','136','137','139','141','156','183','202','209','210','250','251','252','257','265','268','271','272','274','276','278','283','287','305','311','312','320','323','324','104','105','186','258','129','130','149','150','181','198','242','259','262','277','279','281','284','290','291','303','304','313','319','322','330','131','132','138','143','146','172','189','191','199','208','224','229','248','253','254','255','292','325','326','161','162','174','197','200','201','260','329','176','177','178','185','301','306','307','310','293','297','315','316','11','298','299','300','314','317') ORDER BY sort DESC  [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `a_auth_cate` WHERE `pid` = 3 AND `status` = 1 AND `is_menu` <> 0 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT `module`,`controller`,`method`,`title`,`name` FROM `a_auth_cate` WHERE `status` = 1 AND `level` = 2 AND `is_menu` = 0 AND `module` = 'Admin' AND `controller` = 'Admin' AND `id` IN ('0','1','3','4','5','6','10','19','83','184','76','78','79','80','155','169','207','81','211','261','302','309','318','321','327','328','85','106','235','285','87','88','89','93','94','111','112','113','114','115','116','117','179','308','96','107','256','264','270','273','275','282','286','289','98','136','137','139','141','156','183','202','209','210','250','251','252','257','265','268','271','272','274','276','278','283','287','305','311','312','320','323','324','104','105','186','258','129','130','149','150','181','198','242','259','262','277','279','281','284','290','291','303','304','313','319','322','330','131','132','138','143','146','172','189','191','199','208','224','229','248','253','254','255','292','325','326','161','162','174','197','200','201','260','329','176','177','178','185','301','306','307','310','293','297','315','316','11','298','299','300','314','317') ORDER BY sort DESC  [ RunTime:0.0007s ]
+SQL: SELECT `id` FROM `a_auth_cate` WHERE `name` = 'Admin/Admin/savegroupauth' AND `status` = 1 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `a_group` [ RunTime:0.0019s ]
+SQL: UPDATE `a_group` SET `rules`='0,1,3,4,5,6,14,16,24,25,10,19,83,184,76,78,79,80,155,169,207,81,211,261,302,309,318,321,327,328,85,106,235,285,87,88,89,93,94,111,112,113,114,115,116,117,179,308,96,107,256,264,270,273,275,282,286,289,98,136,137,139,141,156,183,202,209,210,250,251,252,257,265,268,271,272,274,276,278,283,287,305,311,312,320,323,324,104,105,186,258,129,130,149,150,181,198,242,259,262,277,279,281,284,290,291,303,304,313,319,322,330,131,132,138,143,146,172,189,191,199,208,224,229,248,253,254,255,292,325,326,161,162,174,197,200,201,260,329,176,177,178,185,301,306,307,310,293,294,295,296,297,315,316,11,298,299,300,314,317' WHERE `status` = 1 AND `id` = 4 [ RunTime:0.0079s ]
+
+[ 2022-04-17T12:29:12+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000263s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000425s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000028s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000039s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003529s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003566s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000306s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000320s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000441s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000456s ]
+
+[ 2022-04-17T12:29:27+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000268s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000438s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000028s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000038s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003326s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003339s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000181s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000190s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000309s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000320s ]
+
+[ 2022-04-17T12:29:52+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000269s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000437s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000034s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000052s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004353s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004376s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000235s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000245s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000359s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000372s ]
+
+[ 2022-04-17T12:30:10+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000316s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000519s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000029s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000045s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003884s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003909s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000229s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000240s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000385s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000406s ]
+
+[ 2022-04-17T12:31:44+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000300s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000509s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000034s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000053s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004076s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004100s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000210s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000221s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000402s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000421s ]
+
+[ 2022-04-17T12:31:53+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000623s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001085s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000037s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000066s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006048s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006224s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001471s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001505s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000555s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000586s ]
+
+[ 2022-04-17T12:32:02+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001276s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001737s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000038s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000067s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.005409s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.005437s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000221s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000231s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000343s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000354s ]
+
+[ 2022-04-17T12:33:13+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000336s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000603s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000031s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000050s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004759s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004780s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000241s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000252s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000407s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000423s ]
+
+[ 2022-04-17T12:33:42+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000320s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000525s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000038s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000067s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004814s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004860s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000515s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000559s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001363s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001404s ]
+
+[ 2022-04-17T12:34:53+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000544s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000890s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000032s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000051s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004696s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004730s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000271s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000285s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000374s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000388s ]
+
+[ 2022-04-17T12:34:59+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000312s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000501s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0004s ]
+SQL: SELECT `chars` FROM a_admin a LEFT JOIN a_char c ON a.id=c.id  WHERE a.username = '020' AND a.status = 1 AND c.type = 0 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT `id`,`username`,`status`,`name` FROM `a_admin` WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `a_admin` SET `last_time`='1650170099',`last_ip`='127.0.0.1' WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 [ RunTime:0.0080s ]
+
+[ 2022-04-17T12:34:59+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000317s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000559s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000043s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000078s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.005565s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.005593s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000249s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000260s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000346s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000361s ]
+
+[ 2022-04-17T12:35:36+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000355s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000609s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0003s ]
+SQL: SELECT `chars` FROM a_admin a LEFT JOIN a_char c ON a.id=c.id  WHERE a.username = '020' AND a.status = 1 AND c.type = 0 LIMIT 1   [ RunTime:0.0016s ]
+SQL: SELECT `id`,`username`,`status`,`name` FROM `a_admin` WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `a_admin` SET `last_time`='1650170136',`last_ip`='127.0.0.1' WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 [ RunTime:0.0081s ]
+
+[ 2022-04-17T12:35:36+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000328s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000522s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000033s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000056s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.005298s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.005329s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000233s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000246s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000410s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000425s ]
+
+[ 2022-04-17T12:37:39+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000327s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000563s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0005s ]
+
+[ 2022-04-17T12:37:41+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000367s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000590s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0006s ]
+
+[ 2022-04-17T12:37:47+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000290s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000512s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0005s ]
+SQL: SELECT `chars` FROM a_admin a LEFT JOIN a_char c ON a.id=c.id  WHERE a.username = '020' AND a.status = 1 AND c.type = 0 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT `id`,`username`,`status`,`name` FROM `a_admin` WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 LIMIT 1   [ RunTime:0.0001s ]
+SQL: UPDATE `a_admin` SET `last_time`='1650170267',`last_ip`='127.0.0.1' WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 [ RunTime:0.0082s ]
+NOTIC: [8192] Array and string offset access syntax with curly braces is deprecated D:\auth_github\auth\ThinkPHP_3.2.3\Library\Think\Cache\Driver\File.class.php 第 59 行.
+SQL: SHOW COLUMNS FROM `a_group_access` [ RunTime:0.0006s ]
+SQL: SELECT `group_id` FROM `a_group_access` WHERE `uid` = 26  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `a_group` [ RunTime:0.0020s ]
+SQL: SELECT `rules` FROM `a_group` WHERE `status` = 1 AND `id` IN ('4')  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `a_auth_cate` [ RunTime:0.0004s ]
+SQL: SELECT `module` FROM `a_auth_cate` WHERE `id` IN ('0','1','3','4','5','6','14','16','24','25','10','19','83','184','76','78','79','80','155','169','207','81','211','261','302','309','318','321','327','328','85','106','235','285','87','88','89','93','94','111','112','113','114','115','116','117','179','308','96','107','256','264','270','273','275','282','286','289','98','136','137','139','141','156','183','202','209','210','250','251','252','257','265','268','271','272','274','276','278','283','287','305','311','312','320','323','324','104','105','186','258','129','130','149','150','181','198','242','259','262','277','279','281','284','290','291','303','304','313','319','322','330','131','132','138','143','146','172','189','191','199','208','224','229','248','253','254','255','292','325','326','161','162','174','197','200','201','260','329','176','177','178','185','301','306','307','310','293','294','295','296','297','315','316','11','298','299','300','314','317') AND `level` = 0 AND `status` = 1 ORDER BY sort DESC LIMIT 1   [ RunTime:0.0005s ]
+
+[ 2022-04-17T12:52:13+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000265s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000432s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0003s ]
+SQL: SELECT `chars` FROM a_admin a LEFT JOIN a_char c ON a.id=c.id  WHERE a.username = '020' AND a.status = 1 AND c.type = 0 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT `id`,`username`,`status`,`name` FROM `a_admin` WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `a_admin` SET `last_time`='1650171133',`last_ip`='127.0.0.1' WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 [ RunTime:0.0065s ]
+NOTIC: [8192] Array and string offset access syntax with curly braces is deprecated D:\auth_github\auth\ThinkPHP_3.2.3\Library\Think\Cache\Driver\File.class.php 第 59 行.
+SQL: SHOW COLUMNS FROM `a_group_access` [ RunTime:0.0004s ]
+SQL: SELECT `group_id` FROM `a_group_access` WHERE `uid` = 26  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `a_group` [ RunTime:0.0015s ]
+SQL: SELECT `rules` FROM `a_group` WHERE `status` = 1 AND `id` IN ('4')  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `a_auth_cate` [ RunTime:0.0008s ]
+SQL: SELECT `module` FROM `a_auth_cate` WHERE `id` IN ('0','1','3','4','5','6','14','16','24','25','10','19','83','184','76','78','79','80','155','169','207','81','211','261','302','309','318','321','327','328','85','106','235','285','87','88','89','93','94','111','112','113','114','115','116','117','179','308','96','107','256','264','270','273','275','282','286','289','98','136','137','139','141','156','183','202','209','210','250','251','252','257','265','268','271','272','274','276','278','283','287','305','311','312','320','323','324','104','105','186','258','129','130','149','150','181','198','242','259','262','277','279','281','284','290','291','303','304','313','319','322','330','131','132','138','143','146','172','189','191','199','208','224','229','248','253','254','255','292','325','326','161','162','174','197','200','201','260','329','176','177','178','185','301','306','307','310','293','294','295','296','297','315','316','11','298','299','300','314','317') AND `level` = 0 AND `status` = 1 ORDER BY sort DESC LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2022-04-17T12:58:42+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000294s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000484s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000030s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000045s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003434s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003450s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000199s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000209s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000329s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000339s ]
+
+[ 2022-04-17T12:59:03+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000264s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000429s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0003s ]
+SQL: SELECT `chars` FROM a_admin a LEFT JOIN a_char c ON a.id=c.id  WHERE a.username = '020' AND a.status = 1 AND c.type = 0 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT `id`,`username`,`status`,`name` FROM `a_admin` WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `a_admin` SET `last_time`='1650171543',`last_ip`='127.0.0.1' WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 [ RunTime:0.0084s ]
+NOTIC: [8192] Array and string offset access syntax with curly braces is deprecated D:\auth_github\auth\ThinkPHP_3.2.3\Library\Think\Cache\Driver\File.class.php 第 59 行.
+SQL: SHOW COLUMNS FROM `a_group_access` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `a_auth_cate` [ RunTime:0.0003s ]
+SQL: SELECT `module` FROM `a_auth_cate` WHERE `id` IN ('0','1','3','4','5','6','14','16','24','25','10','19','83','184','76','78','79','80','155','169','207','81','211','261','302','309','318','321','327','328','85','106','235','285','87','88','89','93','94','111','112','113','114','115','116','117','179','308','96','107','256','264','270','273','275','282','286','289','98','136','137','139','141','156','183','202','209','210','250','251','252','257','265','268','271','272','274','276','278','283','287','305','311','312','320','323','324','104','105','186','258','129','130','149','150','181','198','242','259','262','277','279','281','284','290','291','303','304','313','319','322','330','131','132','138','143','146','172','189','191','199','208','224','229','248','253','254','255','292','325','326','161','162','174','197','200','201','260','329','176','177','178','185','301','306','307','310','293','294','295','296','297','315','316','11','298','299','300','314','317') AND `level` = 0 AND `status` = 1 ORDER BY sort DESC LIMIT 1   [ RunTime:0.0004s ]
+
+[ 2022-04-17T13:00:00+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000251s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000421s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000031s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000048s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003899s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003916s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000341s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000352s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000504s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000516s ]
+
+[ 2022-04-17T13:04:34+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000308s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000513s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0004s ]
+SQL: SELECT `chars` FROM a_admin a LEFT JOIN a_char c ON a.id=c.id  WHERE a.username = '020' AND a.status = 1 AND c.type = 0 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT `id`,`username`,`status`,`name` FROM `a_admin` WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `a_admin` SET `last_time`='1650171874',`last_ip`='127.0.0.1' WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 [ RunTime:0.0082s ]
+NOTIC: [8192] Array and string offset access syntax with curly braces is deprecated D:\auth_github\auth\ThinkPHP_3.2.3\Library\Think\Cache\Driver\File.class.php 第 59 行.
+SQL: SHOW COLUMNS FROM `a_group_access` [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `a_auth_cate` [ RunTime:0.0005s ]
+SQL: SELECT `module` FROM `a_auth_cate` WHERE `id` IN ('0','1','3','4','5','6','14','16','24','25','10','19','83','184','76','78','79','80','155','169','207','81','211','261','302','309','318','321','327','328','85','106','235','285','87','88','89','93','94','111','112','113','114','115','116','117','179','308','96','107','256','264','270','273','275','282','286','289','98','136','137','139','141','156','183','202','209','210','250','251','252','257','265','268','271','272','274','276','278','283','287','305','311','312','320','323','324','104','105','186','258','129','130','149','150','181','198','242','259','262','277','279','281','284','290','291','303','304','313','319','322','330','131','132','138','143','146','172','189','191','199','208','224','229','248','253','254','255','292','325','326','161','162','174','197','200','201','260','329','176','177','178','185','301','306','307','310','293','294','295','296','297','315','316','11','298','299','300','314','317') AND `level` = 0 AND `status` = 1 ORDER BY sort DESC LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2022-04-17T13:06:47+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000287s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000470s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0003s ]
+SQL: SELECT `chars` FROM a_admin a LEFT JOIN a_char c ON a.id=c.id  WHERE a.username = '020' AND a.status = 1 AND c.type = 0 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT `id`,`username`,`status`,`name` FROM `a_admin` WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: UPDATE `a_admin` SET `last_time`='1650172007',`last_ip`='127.0.0.1' WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 [ RunTime:0.0081s ]
+NOTIC: [8192] Array and string offset access syntax with curly braces is deprecated D:\auth_github\auth\ThinkPHP_3.2.3\Library\Think\Cache\Driver\File.class.php 第 59 行.
+SQL: SHOW COLUMNS FROM `a_group_access` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `a_auth_cate` [ RunTime:0.0003s ]
+SQL: SELECT `module` FROM `a_auth_cate` WHERE `id` IN ('0','1','3','4','5','6','14','16','24','25','10','19','83','184','76','78','79','80','155','169','207','81','211','261','302','309','318','321','327','328','85','106','235','285','87','88','89','93','94','111','112','113','114','115','116','117','179','308','96','107','256','264','270','273','275','282','286','289','98','136','137','139','141','156','183','202','209','210','250','251','252','257','265','268','271','272','274','276','278','283','287','305','311','312','320','323','324','104','105','186','258','129','130','149','150','181','198','242','259','262','277','279','281','284','290','291','303','304','313','319','322','330','131','132','138','143','146','172','189','191','199','208','224','229','248','253','254','255','292','325','326','161','162','174','197','200','201','260','329','176','177','178','185','301','306','307','310','293','294','295','296','297','315','316','11','298','299','300','314','317') AND `level` = 0 AND `status` = 1 ORDER BY sort DESC LIMIT 1   [ RunTime:0.0005s ]
+
+[ 2022-04-17T13:09:07+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000289s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000465s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0004s ]
+SQL: SELECT `chars` FROM a_admin a LEFT JOIN a_char c ON a.id=c.id  WHERE a.username = '020' AND a.status = 1 AND c.type = 0 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT `id`,`username`,`status`,`name` FROM `a_admin` WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `a_admin` SET `last_time`='1650172147',`last_ip`='127.0.0.1' WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 [ RunTime:0.0085s ]
+NOTIC: [8192] Array and string offset access syntax with curly braces is deprecated D:\auth_github\auth\ThinkPHP_3.2.3\Library\Think\Cache\Driver\File.class.php 第 59 行.
+SQL: SHOW COLUMNS FROM `a_group_access` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `a_auth_cate` [ RunTime:0.0004s ]
+SQL: SELECT `module` FROM `a_auth_cate` WHERE `id` IN ('0','1','3','4','5','6','14','16','24','25','10','19','83','184','76','78','79','80','155','169','207','81','211','261','302','309','318','321','327','328','85','106','235','285','87','88','89','93','94','111','112','113','114','115','116','117','179','308','96','107','256','264','270','273','275','282','286','289','98','136','137','139','141','156','183','202','209','210','250','251','252','257','265','268','271','272','274','276','278','283','287','305','311','312','320','323','324','104','105','186','258','129','130','149','150','181','198','242','259','262','277','279','281','284','290','291','303','304','313','319','322','330','131','132','138','143','146','172','189','191','199','208','224','229','248','253','254','255','292','325','326','161','162','174','197','200','201','260','329','176','177','178','185','301','306','307','310','293','294','295','296','297','315','316','11','298','299','300','314','317') AND `level` = 0 AND `status` = 1 ORDER BY sort DESC LIMIT 1   [ RunTime:0.0005s ]
+
+[ 2022-04-17T13:12:46+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000293s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000615s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0003s ]
+SQL: SELECT `chars` FROM a_admin a LEFT JOIN a_char c ON a.id=c.id  WHERE a.username = '020' AND a.status = 1 AND c.type = 0 LIMIT 1   [ RunTime:0.0016s ]
+SQL: SELECT `id`,`username`,`status`,`name` FROM `a_admin` WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `a_admin` SET `last_time`='1650172366',`last_ip`='127.0.0.1' WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 [ RunTime:0.0079s ]
+NOTIC: [8192] Array and string offset access syntax with curly braces is deprecated D:\auth_github\auth\ThinkPHP_3.2.3\Library\Think\Cache\Driver\File.class.php 第 59 行.
+SQL: SHOW COLUMNS FROM `a_group_access` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `a_auth_cate` [ RunTime:0.0003s ]
+SQL: SELECT `module` FROM `a_auth_cate` WHERE `id` IN ('0','1','3','4','5','6','14','16','24','25','10','19','83','184','76','78','79','80','155','169','207','81','211','261','302','309','318','321','327','328','85','106','235','285','87','88','89','93','94','111','112','113','114','115','116','117','179','308','96','107','256','264','270','273','275','282','286','289','98','136','137','139','141','156','183','202','209','210','250','251','252','257','265','268','271','272','274','276','278','283','287','305','311','312','320','323','324','104','105','186','258','129','130','149','150','181','198','242','259','262','277','279','281','284','290','291','303','304','313','319','322','330','131','132','138','143','146','172','189','191','199','208','224','229','248','253','254','255','292','325','326','161','162','174','197','200','201','260','329','176','177','178','185','301','306','307','310','293','294','295','296','297','315','316','11','298','299','300','314','317') AND `level` = 0 AND `status` = 1 ORDER BY sort DESC LIMIT 1   [ RunTime:0.0004s ]
+
+[ 2022-04-17T13:15:46+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000474s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000684s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 49 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0002s ]
+SQL: SELECT `chars` FROM a_admin a LEFT JOIN a_char c ON a.id=c.id  WHERE a.username = '020' AND a.status = 1 AND c.type = 0 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT `id`,`username`,`status`,`name` FROM `a_admin` WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 LIMIT 1   [ RunTime:0.0001s ]
+SQL: UPDATE `a_admin` SET `last_time`='1650172546',`last_ip`='127.0.0.1' WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 [ RunTime:0.0275s ]
+NOTIC: [8192] Array and string offset access syntax with curly braces is deprecated D:\auth_github\auth\ThinkPHP_3.2.3\Library\Think\Cache\Driver\File.class.php 第 59 行.
+SQL: SHOW COLUMNS FROM `a_group_access` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `a_auth_cate` [ RunTime:0.0004s ]
+SQL: SELECT `module` FROM `a_auth_cate` WHERE `id` IN ('0','1','3','4','5','6','14','16','24','25','10','19','83','184','76','78','79','80','155','169','207','81','211','261','302','309','318','321','327','328','85','106','235','285','87','88','89','93','94','111','112','113','114','115','116','117','179','308','96','107','256','264','270','273','275','282','286','289','98','136','137','139','141','156','183','202','209','210','250','251','252','257','265','268','271','272','274','276','278','283','287','305','311','312','320','323','324','104','105','186','258','129','130','149','150','181','198','242','259','262','277','279','281','284','290','291','303','304','313','319','322','330','131','132','138','143','146','172','189','191','199','208','224','229','248','253','254','255','292','325','326','161','162','174','197','200','201','260','329','176','177','178','185','301','306','307','310','293','294','295','296','297','315','316','11','298','299','300','314','317') AND `level` = 0 AND `status` = 1 ORDER BY sort DESC LIMIT 1   [ RunTime:0.0004s ]
+
+[ 2022-04-17T13:16:32+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000299s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000505s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 52 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0007s ]
+SQL: SELECT `chars` FROM a_admin a LEFT JOIN a_char c ON a.id=c.id  WHERE a.username = '020' AND a.status = 1 AND c.type = 0 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT `id`,`username`,`status`,`name` FROM `a_admin` WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `a_admin` SET `last_time`='1650172592',`last_ip`='127.0.0.1' WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 [ RunTime:0.0083s ]
+NOTIC: [8192] Array and string offset access syntax with curly braces is deprecated D:\auth_github\auth\ThinkPHP_3.2.3\Library\Think\Cache\Driver\File.class.php 第 59 行.
+SQL: SHOW COLUMNS FROM `a_group_access` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `a_auth_cate` [ RunTime:0.0003s ]
+SQL: SELECT `module` FROM `a_auth_cate` WHERE `id` IN ('0','1','3','4','5','6','14','16','24','25','10','19','83','184','76','78','79','80','155','169','207','81','211','261','302','309','318','321','327','328','85','106','235','285','87','88','89','93','94','111','112','113','114','115','116','117','179','308','96','107','256','264','270','273','275','282','286','289','98','136','137','139','141','156','183','202','209','210','250','251','252','257','265','268','271','272','274','276','278','283','287','305','311','312','320','323','324','104','105','186','258','129','130','149','150','181','198','242','259','262','277','279','281','284','290','291','303','304','313','319','322','330','131','132','138','143','146','172','189','191','199','208','224','229','248','253','254','255','292','325','326','161','162','174','197','200','201','260','329','176','177','178','185','301','306','307','310','293','294','295','296','297','315','316','11','298','299','300','314','317') AND `level` = 0 AND `status` = 1 ORDER BY sort DESC LIMIT 1   [ RunTime:0.0005s ]
+
+[ 2022-04-17T13:16:49+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+ERR: 11
+
+[ 2022-04-17T13:17:00+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000444s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000688s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 52 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::success($message, $url = '') should be compatible with Think\Controller::success($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 32 行.
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0005s ]
+SQL: SELECT `chars` FROM a_admin a LEFT JOIN a_char c ON a.id=c.id  WHERE a.username = '020' AND a.status = 1 AND c.type = 0 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT `id`,`username`,`status`,`name` FROM `a_admin` WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 LIMIT 1   [ RunTime:0.0001s ]
+SQL: UPDATE `a_admin` SET `last_time`='1650172620',`last_ip`='127.0.0.1' WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 [ RunTime:0.0079s ]
+NOTIC: [8192] Array and string offset access syntax with curly braces is deprecated D:\auth_github\auth\ThinkPHP_3.2.3\Library\Think\Cache\Driver\File.class.php 第 59 行.
+SQL: SHOW COLUMNS FROM `a_group_access` [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `a_auth_cate` [ RunTime:0.0002s ]
+SQL: SELECT `module` FROM `a_auth_cate` WHERE `id` IN ('0','1','3','4','5','6','14','16','24','25','10','19','83','184','76','78','79','80','155','169','207','81','211','261','302','309','318','321','327','328','85','106','235','285','87','88','89','93','94','111','112','113','114','115','116','117','179','308','96','107','256','264','270','273','275','282','286','289','98','136','137','139','141','156','183','202','209','210','250','251','252','257','265','268','271','272','274','276','278','283','287','305','311','312','320','323','324','104','105','186','258','129','130','149','150','181','198','242','259','262','277','279','281','284','290','291','303','304','313','319','322','330','131','132','138','143','146','172','189','191','199','208','224','229','248','253','254','255','292','325','326','161','162','174','197','200','201','260','329','176','177','178','185','301','306','307','310','293','294','295','296','297','315','316','11','298','299','300','314','317') AND `level` = 0 AND `status` = 1 ORDER BY sort DESC LIMIT 1   [ RunTime:0.0004s ]
+ERR: 11
+
+[ 2022-04-17T13:17:00+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+ERR: 11
+
+[ 2022-04-17T13:21:15+08:00 ] 127.0.0.1 /auth/index.php/Admin/Public/islogin.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000404s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000679s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring D:\auth_github\auth\ThinkPHP_3.2.3\Common\functions.php 第 1263 行.
+NOTIC: [2] Declaration of Admin\Controller\PublicController::error($message = '') should be compatible with Think\Controller::error($message = '', $jumpUrl = '', $ajax = false) D:\auth_github\auth\Application\Admin\Controller\PublicController.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `a_admin` [ RunTime:0.0010s ]
+SQL: SELECT `chars` FROM a_admin a LEFT JOIN a_char c ON a.id=c.id  WHERE a.username = '020' AND a.status = 1 AND c.type = 0 LIMIT 1   [ RunTime:0.0022s ]
+SQL: SELECT `id`,`username`,`status`,`name` FROM `a_admin` WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `a_admin` SET `last_time`='1650172875',`last_ip`='127.0.0.1' WHERE `username` = '020' AND `password` = 'af387e665f1dfaaabb092cf925fa01ef' AND `status` = 1 [ RunTime:0.0078s ]
+NOTIC: [8192] Array and string offset access syntax with curly braces is deprecated D:\auth_github\auth\ThinkPHP_3.2.3\Library\Think\Cache\Driver\File.class.php 第 59 行.
+SQL: SHOW COLUMNS FROM `a_group_access` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `a_auth_cate` [ RunTime:0.0003s ]
+SQL: SELECT `module` FROM `a_auth_cate` WHERE `id` IN ('0','1','3','4','5','6','14','16','24','25','10','19','83','184','76','78','79','80','155','169','207','81','211','261','302','309','318','321','327','328','85','106','235','285','87','88','89','93','94','111','112','113','114','115','116','117','179','308','96','107','256','264','270','273','275','282','286','289','98','136','137','139','141','156','183','202','209','210','250','251','252','257','265','268','271','272','274','276','278','283','287','305','311','312','320','323','324','104','105','186','258','129','130','149','150','181','198','242','259','262','277','279','281','284','290','291','303','304','313','319','322','330','131','132','138','143','146','172','189','191','199','208','224','229','248','253','254','255','292','325','326','161','162','174','197','200','201','260','329','176','177','178','185','301','306','307','310','293','294','295','296','297','315','316','11','298','299','300','314','317') AND `level` = 0 AND `status` = 1 ORDER BY sort DESC LIMIT 1   [ RunTime:0.0004s ]
+
