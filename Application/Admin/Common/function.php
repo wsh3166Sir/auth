@@ -29,7 +29,8 @@
      * @param string $font 字体名称
      * @param int $interference 雪花数量
      */
-    function code($width = 100, $height = 32, $font_size = 13, $code_len = 4, $line_num = 5, $font = './Public/ttf/5.ttf', $interference = 2,$verifyName = 'code'){
+    function code($width = 100, $height = 32, $font_size = 13, $code_len = 4, $line_num = 5, $font = './Public/ttf/5.TTF', $interference = 2,$verifyName = 'code'){
+        $font=realpath($font);
         $image = imagecreatetruecolor($width, $height);
         $image_color = imagecolorallocate($image,mt_rand(157,255), mt_rand(157,255), mt_rand(157,255));
         imagefilledrectangle($image,0,$height,$width,0,$image_color);
@@ -43,7 +44,7 @@
             imagettftext($image,$font_size,mt_rand(-30,30),$x*$i+mt_rand(1,3),$height / 1.4,$font_color,$font,$codeStr);
         }
 
-        $codeStrs="qqqq";
+        //$codeStrs="qqqq";
         session($verifyName,md5(strtolower($codeStrs)));
         
         //生成线条
