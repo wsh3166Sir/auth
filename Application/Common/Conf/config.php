@@ -9,7 +9,9 @@ return array(
         '__HOMESTYLE__' => __ROOT__ . '/Public/Home',
         '__API__' => __ROOT__ . '/Public/Api',
     ),
-    'URL_MODEL'             => 2,
+    'URL_MODEL'             => 1,
+/*   URL_MODEL:  0 (普通模式); 1 (PATHINFO 模式); 2 (REWRITE  模式); 3 (兼容模式)  默认为PATHINFO 模式  */
+	
     /* 数据库设置 */
     'DB_TYPE'               => 'mysqli',     // 数据库类型
     'DB_HOST'               => 'localhost', // 服务器地址
@@ -43,8 +45,8 @@ return array(
     'ADMINISTRATOR'         => 1,
     'USERNAME'              => 'username',
     'APP_SUB_DOMAIN_DEPLOY' => 1, // 开启子域名配置
-    'DEFAULTS_MODULE'       => 'Admin',
-    'DEFAULT_MODULE'        => 'Admin',
+    'DEFAULTS_MODULE' => 'Admin',  //登录前跳转,必须是Admin
+    'DEFAULT_MODULE' => 'Content',   //登录后跳转,可以是用户模块
 
     //邮件配置
     'MAIL_HOST' =>'smtp.163.com',//smtp服务器的名称
