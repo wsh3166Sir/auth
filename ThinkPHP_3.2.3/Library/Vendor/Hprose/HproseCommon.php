@@ -123,7 +123,7 @@ class HproseDate {
         while ($days >= 365) {
             if ($year >= 9999) return false;
             if ($month <= 2) {
-                if ((($year % 4) == 0) ? (($year % 100) == 0) ? (($year % 400) == 0) : true : false) {
+               if ((($year % 4) == 0) && (($year % 100) == 0) && (($year % 400) == 0) ) {
                     $days -= 366;
                 }
                 else {
@@ -133,7 +133,7 @@ class HproseDate {
             }
             else {
                 $year++;
-                if ((($year % 4) == 0) ? (($year % 100) == 0) ? (($year % 400) == 0) : true : false) {
+              if ( (($year % 4) == 0) && (($year % 100) == 0) && (($year % 400) == 0)) {
                     $days -= 366;
                 }
                 else {
@@ -145,7 +145,7 @@ class HproseDate {
             if ($year <= 1) return false;
             if ($month <= 2) {
                 $year--;
-                if ((($year % 4) == 0) ? (($year % 100) == 0) ? (($year % 400) == 0) : true : false) {
+               if ((($year % 4) == 0) && (($year % 100) == 0) && (($year % 400) == 0)) {
                     $days += 366;
                 }
                 else {
@@ -153,7 +153,7 @@ class HproseDate {
                 }
             }
             else {
-                if ((($year % 4) == 0) ? (($year % 100) == 0) ? (($year % 400) == 0) : true : false) {
+               if ((($year % 4) == 0) && (($year % 100) == 0) && (($year % 400) == 0)) {
                     $days += 366;
                 }
                 else {
@@ -232,7 +232,7 @@ class HproseDate {
     }
 
     public static function isLeapYear($year) {
-        return (($year % 4) == 0) ? (($year % 100) == 0) ? (($year % 400) == 0) : true : false;
+        return (($year % 4) == 0) && (($year % 100) == 0) && (($year % 400) == 0);
     }
     public static function daysInMonth($year, $month) {
         if (($month < 1) || ($month > 12)) {
