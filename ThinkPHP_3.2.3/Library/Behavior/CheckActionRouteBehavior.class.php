@@ -26,7 +26,7 @@ class CheckActionRouteBehavior {
             $depr = C('URL_PATHINFO_DEPR');
             // 分隔符替换 确保路由定义使用统一的分隔符
             $regx = str_replace($depr,'/',$regx);
-            $regx = substr_replace($regx,'',0,strlen(__URL__));
+            $regx = substr_replace($regx,'',0,strlen(constant("__URL__")));
             foreach ($routes as $rule=>$route){
                 if(0===strpos($rule,'/') && preg_match($rule,$regx,$matches)) { // 正则路由
                     return C('ACTION_NAME',$this->parseRegex($matches,$route,$regx));
