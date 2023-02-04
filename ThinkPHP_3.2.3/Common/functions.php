@@ -233,7 +233,7 @@ function T($template='',$layer=''){
         $baseUrl    =   C('VIEW_PATH');
     }elseif(defined('TMPL_PATH')){ 
         // 指定全局视图目录
-        $baseUrl    =   TMPL_PATH.$module;
+        $baseUrl    =   constant("TMPL_PATH").$module;
     }else{
         $baseUrl    =   APP_PATH.$module.$layer.'/';
     }
